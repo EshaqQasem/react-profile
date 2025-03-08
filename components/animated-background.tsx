@@ -16,15 +16,15 @@ export default function AnimatedBackground({ className = "" }: AnimatedBackgroun
     if (!canvas) return
 
     const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    if (!ctx) return // Ensure ctx is not null
 
     let particles: Particle[] = []
     let animationFrameId: number
 
     const resizeCanvas = () => {
       const dpr = window.devicePixelRatio || 1
-      canvas.width = canvas.offsetWidth * dpr
-      canvas.height = canvas.offsetHeight * dpr
+      canvas.width = (canvas?.offsetWidth || 0) * dpr
+      canvas.height = (canvas?.offsetHeight || 0) * dpr
       ctx.scale(dpr, dpr)
       initParticles()
     }
@@ -38,8 +38,8 @@ export default function AnimatedBackground({ className = "" }: AnimatedBackgroun
       color: string
 
       constructor() {
-        this.x = Math.random() * canvas.offsetWidth
-        this.y = Math.random() * canvas.offsetHeight
+        this.x = Math.random() * (canvas?.offsetWidth || 0)
+        this.y = Math.random() * (canvas?.offsetHeight || 0)
         this.size = Math.random() * 3 + 1
         this.speedX = Math.random() * 0.5 - 0.25
         this.speedY = Math.random() * 0.5 - 0.25
@@ -50,24 +50,26 @@ export default function AnimatedBackground({ className = "" }: AnimatedBackgroun
         this.x += this.speedX
         this.y += this.speedY
 
-        if (this.x > canvas.offsetWidth) this.x = 0
-        else if (this.x < 0) this.x = canvas.offsetWidth
+        if (this.x > (canvas?.offsetWidth || 0)) this.x = 0
+        else if (this.x < 0) this.x = canvas?.offsetWidth || 0
 
-        if (this.y > canvas.offsetHeight) this.y = 0
-        else if (this.y < 0) this.y = canvas.offsetHeight
+        if (this.y > (canvas?.offsetHeight || 0)) this.y = 0
+        else if (this.y < 0) this.y = canvas?.offsetHeight || 0
       }
 
       draw() {
-        ctx.fillStyle = this.color
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
+        if (ctx) { // Check if ctx is not null before drawing
+          ctx.fillStyle = this.color
+          ctx.beginPath()
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+          ctx.fill()
+        }
       }
     }
 
     function initParticles() {
       particles = []
-      const particleCount = Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 10000)
+      const particleCount = Math.floor(((canvas?.offsetWidth || 0) * (canvas?.offsetHeight || 0)) / 10000)
 
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle())
@@ -85,28 +87,32 @@ export default function AnimatedBackground({ className = "" }: AnimatedBackgroun
 
           if (distance < maxDistance) {
             const opacity = 1 - distance / maxDistance
-            ctx.strokeStyle =
-              resolvedTheme === "dark" ? `rgba(255, 255, 255, ${opacity * 0.15})` : `rgba(0, 0, 0, ${opacity * 0.05})`
-            ctx.lineWidth = 1
-            ctx.beginPath()
-            ctx.moveTo(particles[a].x, particles[a].y)
-            ctx.lineTo(particles[b].x, particles[b].y)
-            ctx.stroke()
+            if (ctx) { // Ensure ctx is available before drawing the connection
+              ctx.strokeStyle =
+                resolvedTheme === "dark" ? `rgba(255, 255, 255, ${opacity * 0.15})` : `rgba(0, 0, 0, ${opacity * 0.05})`
+              ctx.lineWidth = 1
+              ctx.beginPath()
+              ctx.moveTo(particles[a].x, particles[a].y)
+              ctx.lineTo(particles[b].x, particles[b].y)
+              ctx.stroke()
+            }
           }
         }
       }
     }
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
+      if (ctx) { // Make sure ctx is available before clearing and drawing
+        ctx.clearRect(0, 0, (canvas?.offsetWidth || 0), (canvas?.offsetHeight || 0))
 
-      for (const particle of particles) {
-        particle.update()
-        particle.draw()
+        for (const particle of particles) {
+          particle.update()
+          particle.draw()
+        }
+
+        connectParticles()
+        animationFrameId = requestAnimationFrame(animate)
       }
-
-      connectParticles()
-      animationFrameId = requestAnimationFrame(animate)
     }
 
     // Initialize
@@ -125,4 +131,3 @@ export default function AnimatedBackground({ className = "" }: AnimatedBackgroun
 
   return <canvas ref={canvasRef} className={`absolute inset-0 w-full h-full ${className}`} />
 }
-

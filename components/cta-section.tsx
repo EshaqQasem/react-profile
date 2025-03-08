@@ -70,7 +70,7 @@ export default function CTASection({
               <Button
                 key={index}
                 size="lg"
-                variant={getButtonClass(button, index) as any}
+                variant={getButtonClass(button, index) as "outline"}
                 className={getExtraButtonClass(button)}
                 asChild
               >

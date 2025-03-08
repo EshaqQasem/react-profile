@@ -10,7 +10,8 @@ interface AnimatedSectionProps {
   className?: string
   delay?: number
   threshold?: number
-  animation?: "fadeInUp" | "fadeIn" | "scaleIn" | "slideInRight" | "slideInLeft"
+  animation?: "fadeInUp" | "fadeIn" | "scaleIn" | "slideInRight" | "slideInLeft",
+  id?: string;
 }
 
 export default function AnimatedSection({

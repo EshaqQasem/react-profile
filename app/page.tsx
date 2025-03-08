@@ -8,7 +8,6 @@ import ServiceCard from "@/components/service-card"
 import TestimonialCard from "@/components/testimonial-card"
 import AnimatedBackground from "@/components/animated-background"
 import SkillsSection from "@/components/skills-section"
-import { getSkillIcon } from "@/components/skill-icons"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 
@@ -22,7 +21,7 @@ export default function Home() {
           <AnimatedSection animation="fadeIn">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                مرحباً، أنا <AnimatedText text="أحمد محمد" className="text-primary" />
+                مرحباً، أنا <AnimatedText text="يعقوب الحيدري" className="text-primary" />
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
                 مطور ويب متخصص في بناء تطبيقات الويب الحديثة والمواقع الإلكترونية المتميزة
@@ -121,7 +120,7 @@ export default function Home() {
                 tags: ["React Native", "Firebase", "Redux"],
                 delay: 0.2,
               },
-            ].map((project, index) => (
+            ].map((project) => (
               <AnimatedSection key={project.id} delay={project.delay} className="hover-scale">
                 <ProjectCard
                   id={project.id}
@@ -272,7 +271,7 @@ export default function Home() {
                 className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary hover-lift"
                 asChild
               >
-                <Link href="/cv.pdf" download>
+                <Link href="/./imags/2.pdf" download>
                   <Download className="ml-2 h-4 w-4" /> تحميل السيرة الذاتية
                 </Link>
               </Button>

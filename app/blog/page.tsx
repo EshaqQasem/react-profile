@@ -1,16 +1,15 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import SectionHeading from "@/components/section-heading"
-import BlogCard from "@/components/blog-card"
-import { Input } from "@/components/ui/input"
-import { Search } from "lucide-react"
-import AnimatedSection from "@/components/animated-section"
+"use client";
+import { useState, useEffect, useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import SectionHeading from "@/components/section-heading";
+import BlogCard from "@/components/blog-card";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import AnimatedSection from "@/components/animated-section";
 
 export default function BlogPage() {
-  // Sample blog posts data
-  const blogPosts = [
+  // Memoizing blogPosts to avoid unnecessary rerenders
+  const blogPosts = useMemo(() => [
     {
       id: "post1",
       title: "كيفية بناء واجهة مستخدم جذابة باستخدام React",
@@ -71,35 +70,35 @@ export default function BlogPage() {
       readTime: "9 دقائق",
       category: "React",
     },
-  ]
+  ], []);
 
   // Categories
-  const categories = ["الكل", "React", "Next.js", "TypeScript", "Node.js", "MongoDB"]
+  const categories = ["الكل", "React", "Next.js", "TypeScript", "Node.js", "MongoDB"];
 
   // State for filtering and search
-  const [selectedCategory, setSelectedCategory] = useState("الكل")
-  const [searchQuery, setSearchQuery] = useState("")
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts)
+  const [selectedCategory, setSelectedCategory] = useState("الكل");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
 
   // Filter posts based on category and search query
   useEffect(() => {
-    let result = blogPosts
+    let result = [...blogPosts];
 
     // Filter by category
     if (selectedCategory !== "الكل") {
-      result = result.filter((post) => post.category === selectedCategory)
+      result = result.filter((post) => post.category === selectedCategory);
     }
 
     // Filter by search query
     if (searchQuery.trim() !== "") {
-      const query = searchQuery.toLowerCase()
+      const query = searchQuery.toLowerCase();
       result = result.filter(
         (post) => post.title.toLowerCase().includes(query) || post.excerpt.toLowerCase().includes(query),
-      )
+      );
     }
 
-    setFilteredPosts(result)
-  }, [selectedCategory, searchQuery])
+    setFilteredPosts(result);
+  }, [selectedCategory, searchQuery, blogPosts]);
 
   return (
     <div className="py-12">
@@ -126,7 +125,7 @@ export default function BlogPage() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             </div>
             <div className="flex flex-wrap gap-2">
-              {categories.map((category, index) => (
+              {categories.map((category) => (
                 <Button
                   key={category}
                   variant={category === selectedCategory ? "default" : "outline"}
@@ -163,8 +162,8 @@ export default function BlogPage() {
               <Button
                 variant="link"
                 onClick={() => {
-                  setSelectedCategory("الكل")
-                  setSearchQuery("")
+                  setSelectedCategory("الكل");
+                  setSearchQuery("");
                 }}
                 className="mt-2"
               >
@@ -213,6 +212,5 @@ export default function BlogPage() {
         </AnimatedSection>
       </div>
     </div>
-  )
+  );
 }
-
