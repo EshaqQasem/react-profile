@@ -15,7 +15,7 @@ export default function BlogPage() {
       title: "كيفية بناء واجهة مستخدم جذابة باستخدام React",
       excerpt:
         "في هذا المقال، سنتعرف على كيفية بناء واجهة مستخدم جذابة وسهلة الاستخدام باستخدام مكتبة React وبعض المكتبات المساعدة مثل Tailwind CSS.",
-      image: "/./imags/blog/1.webp",
+      image: "/imags/blog/1.webp",
       date: "10 يناير 2023",
       readTime: "5 دقائق",
       category: "React",
@@ -25,7 +25,7 @@ export default function BlogPage() {
       title: "مقدمة في Next.js: إطار العمل المثالي لتطبيقات React",
       excerpt:
         "Next.js هو إطار عمل مبني على React يوفر ميزات مثل توجيه الصفحات والتحميل المسبق والتوليد الثابت. في هذا المقال، سنتعرف على أساسيات Next.js وكيفية البدء في استخدامه.",
-      image: "/./imags/blog/2.jpg",
+      image: "/imags/blog/2.jpg",
       date: "15 فبراير 2023",
       readTime: "7 دقائق",
       category: "Next.js",
@@ -35,7 +35,7 @@ export default function BlogPage() {
       title: "استخدام TypeScript مع React: دليل شامل",
       excerpt:
         "TypeScript يضيف أنواع ثابتة إلى JavaScript، مما يساعد في اكتشاف الأخطاء أثناء التطوير. في هذا المقال، سنتعلم كيفية استخدام TypeScript مع React لبناء تطبيقات أكثر أمانًا.",
-      image: "/./imags/blog/3.jpg",
+      image: "/imags/blog/3.jpg",
       date: "5 مارس 2023",
       readTime: "10 دقائق",
       category: "TypeScript",
@@ -45,7 +45,7 @@ export default function BlogPage() {
       title: "بناء واجهة خلفية باستخدام Node.js و Express",
       excerpt:
         "في هذا المقال، سنتعلم كيفية بناء واجهة خلفية قوية باستخدام Node.js و Express، وكيفية إنشاء API RESTful للتواصل مع تطبيق الواجهة الأمامية.",
-      image: "/./imags/blog/4.jpg",
+      image: "/imags/blog/4.jpg",
       date: "20 أبريل 2023",
       readTime: "8 دقائق",
       category: "Node.js",
@@ -55,7 +55,7 @@ export default function BlogPage() {
       title: "استخدام MongoDB مع Node.js: دليل شامل",
       excerpt:
         "MongoDB هي قاعدة بيانات NoSQL شائعة تستخدم مع تطبيقات Node.js. في هذا المقال، سنتعلم كيفية استخدام MongoDB مع Node.js لتخزين واسترجاع البيانات.",
-      image: "/./imags/blog/5.webp",
+      image: "/imags/blog/5.webp",
       date: "10 مايو 2023",
       readTime: "6 دقائق",
       category: "MongoDB",
@@ -65,7 +65,7 @@ export default function BlogPage() {
       title: "تحسين أداء تطبيقات React: نصائح وحيل",
       excerpt:
         "في هذا المقال، سنتعرف على بعض النصائح والحيل لتحسين أداء تطبيقات React، مثل استخدام React.memo و useMemo و useCallback.",
-      image: "/./imags/blog/6.jpg",
+      image: "/imags/blog/6.jpg",
       date: "15 يونيو 2023",
       readTime: "9 دقائق",
       category: "React",

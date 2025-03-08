@@ -14,7 +14,7 @@ export default function AboutPage() {
         <AnimatedSection className="flex flex-col md:flex-row gap-12 items-center mb-16" animation="fadeIn">
           <div className="w-full md:w-1/3">
             <div className="relative w-full aspect-square rounded-full overflow-hidden border-8 border-primary/10 hover-scale">
-              <Image src="/./imags/1.png" alt="صورة شخصية" fill className="object-cover" />
+              <Image src="/imags/1.png" alt="صورة شخصية" fill className="object-cover" />
             </div>
           </div>
           <div className="w-full md:w-2/3">
@@ -42,7 +42,7 @@ export default function AboutPage() {
               </div>
             </div>
             <Button asChild className="hover-lift">
-              <Link href="/./imags/2.pdf" download>
+              <Link href="/imags/2.pdf" download>
                 <Download className="ml-2 h-4 w-4" /> تحميل السيرة الذاتية
               </Link>
             </Button>
@@ -59,7 +59,7 @@ export default function AboutPage() {
               <div className="md:w-1/3 relative min-h-[300px] bg-primary/5">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <Image
-                    src="/./imags/3.png"
+                    src="/imags/3.png"
                     alt="رحلتي المهنية"
                     width={300}
                     height={300}

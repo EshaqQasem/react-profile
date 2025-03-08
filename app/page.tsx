@@ -100,7 +100,7 @@ export default function Home() {
                 title: "منصة تعليمية",
                 description:
                   "منصة تعليمية متكاملة تتيح للمعلمين إنشاء دورات تعليمية وللطلاب الاشتراك فيها ومتابعة تقدمهم",
-                  image: "/./imags/blog/7.webp",
+                  image: "/imags/blog/7.webp",
                 tags: ["Next.js", "Node.js", "MongoDB"],
                 delay: 0,
               },
@@ -108,7 +108,7 @@ export default function Home() {
                 id: "project2",
                 title: "متجر إلكتروني",
                 description: "متجر إلكتروني متكامل مع نظام دفع وإدارة مخزون وسلة تسوق",
-                image: "/./imags/blog/8.png",
+                image: "/imags/blog/8.png",
                 tags: ["React", "Express", "Stripe", "PostgreSQL"],
                 delay: 0.1,
               },
@@ -116,7 +116,7 @@ export default function Home() {
                 id: "project3",
                 title: "تطبيق إدارة المهام",
                 description: "تطبيق لإدارة المهام والمشاريع مع إمكانية تتبع الوقت والتعاون مع الفريق",
-                image: "/./imags/blog/9.png",
+                image: "/imags/blog/9.png",
                 tags: ["React Native", "Firebase", "Redux"],
                 delay: 0.2,
               },
@@ -271,7 +271,7 @@ export default function Home() {
                 className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary hover-lift"
                 asChild
               >
-                <Link href="/./imags/2.pdf" download>
+                <Link href="/imags/2.pdf" download>
                   <Download className="ml-2 h-4 w-4" /> تحميل السيرة الذاتية
                 </Link>
               </Button>
