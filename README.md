@@ -89,6 +89,16 @@ yacoubal-hardari-react-profile/
 │   ├── theme-test.tsx              # Component for testing theme changes or settings
 │   ├── theme-toggle.tsx            # Toggle component for switching between light/dark themes
 │   ├── whatsapp-button.tsx         # Button for integrating WhatsApp for easy contact
+│   ├── service-request/            # Service request components
+│   │   ├── index.tsx               # Main service request component
+│   │   ├── service-form-step1.tsx  # First step of the service request form
+│   │   ├── service-form-step2.tsx  # Second step of the service request form
+│   │   ├── service-form-step3.tsx  # Third step of the service request form
+│   │   ├── service-form-success.tsx # Success message after form submission
+│   │   ├── service-request-button.tsx # Button to trigger the service request
+│   │   ├── service-request-context.tsx # Context provider for managing service request state
+│   │   ├── service-request-modal.tsx # Modal window for service request
+│   │   └── service-utils.ts        # Utility functions for handling service requests
 │   └── ui/                         # UI components (buttons, inputs, cards, etc.)
 │       ├── badge.tsx               # Badge component for showing small labels (e.g., "new", "hot")
 │       ├── button.tsx              # Button component
@@ -96,6 +106,12 @@ yacoubal-hardari-react-profile/
 │       ├── dropdown-menu.tsx       # Dropdown menu component
 │       ├── input.tsx               # Input field component
 │       └── progress.tsx            # Progress bar component
+│       ├── alert.tsx               # Alert component for displaying important messages like success, warnings, or errors
+│       ├── dialog.tsx              # Dialog component for modal popups that focus user attention on specific tasks  
+│       ├── label.tsx               # Label component for associating text descriptions with form elements, enhancing accessibility  
+│       ├── select.tsx              # Select component for dropdown list selection of predefined options  
+│       ├── tabs.tsx                # Tabs component for allowing users to switch between different views or sections  
+│       └── textarea.tsx            # Textarea component for multiline text input, typically for longer messages or descriptions
 │  
 ├── lib/                            # Utility functions
 │   └── utils.ts                    # Helper functions, for commonly used tasks
