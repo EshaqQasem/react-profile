@@ -10,6 +10,7 @@ import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import BlogCard from "@/components/blog-card"
 import { useParams } from "next/navigation";
+import CodeBlock from "@/components/code-block"
 // Sample blog posts data
 const blogPosts = [
   {
@@ -100,7 +101,7 @@ const blogPosts = [
       "Next.js يوفر عدة طرق لجلب البيانات:",
       "### getStaticProps",
       "تستخدم لجلب البيانات في وقت البناء:",
-      "```jsx\nexport async function getStaticProps() {\n  const res = await fetch('https://api.example.com/data');\n  const data = await res.json();\n\n  return {\n    props: { data },\n  };\n}\n\nexport default function Page({ data }) {\n  return (\n    <div>\n      <h1>البيانات</h1>\n      <pre>{JSON.stringify(data, null, 2)}</pre>\n    </div>\n  );\n}\n```",
+      "```{jsx\nexport async function getStaticProps() {\n  const res = await fetch('https://api.example.com/data');\n  const data = await res.json();\n\n  return {\n    props: { data },\n  };\n}\n\nexport default function Page({ data }) {\n  return (\n    <div>\n      <h1>البيانات</h1>\n      <pre>{JSON.stringify(data, null, 2)}</pre>\n    </div>\n  );\n}\n}```",
       "### getServerSideProps",
       "تستخدم لجلب البيانات في كل طلب:",
       "```jsx\nexport async function getServerSideProps() {\n  const res = await fetch('https://api.example.com/data');\n  const data = await res.json();\n\n  return {\n    props: { data },\n  };\n}\n```",
@@ -315,6 +316,24 @@ export default function BlogPostPage() {
     .filter((p) => p.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3)
 
+  
+  // Function to detect code language from code block
+  const detectLanguage = (codeBlock: string): string => {
+    if (codeBlock.includes("import React") || codeBlock.includes("function") || codeBlock.includes("return (")) {
+      return "jsx"
+    }
+    if (codeBlock.includes("<") && codeBlock.includes(">") && codeBlock.includes("</")) {
+      return "html"
+    }
+    if (codeBlock.includes("interface") || codeBlock.includes("type ") || codeBlock.includes("<T>")) {
+      return "typescript"
+    }
+    if (codeBlock.includes("npm") || codeBlock.includes("npx") || codeBlock.includes("cd ")) {
+      return "bash"
+    }
+    return "javascript"
+  }
+
   return (
     <div className="py-12">
       <div className="container">
@@ -382,11 +401,11 @@ export default function BlogPostPage() {
                       </h2>
                     )
                   } else if (paragraph.startsWith("```")) {
-                    const codeContent = paragraph.split("\n").slice(1, -1).join("\n")
+                    const parts = paragraph.split("\n")
+                    const language = parts[0].replace("```", "").trim()
+                    const codeContent = parts.slice(1, -1).join("\n")
                     return (
-                      <pre key={index} className="bg-muted p-4 rounded-md overflow-x-auto my-4">
-                        <code>{codeContent}</code>
-                      </pre>
+                      <CodeBlock key={index} code={codeContent} language={language || detectLanguage(codeContent)} />
                     )
                   } else if (paragraph.startsWith("-")) {
                     return (

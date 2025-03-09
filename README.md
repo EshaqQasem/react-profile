@@ -1,5 +1,5 @@
 
-# Open Sources Profile V.1.1
+# Open Sources Profile V.1.2
 
 live Demo https://react-profile-gilt.vercel.app/
 

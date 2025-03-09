@@ -7,7 +7,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { AnimatePresence, motion } from "framer-motion"
-
+import ServiceRequestWrapper from "@/components/service-request"
+import PageLoading from "@/components/page-loading"
+import { useState, useEffect } from "react"
 const cairo = Cairo({ subsets: ["arabic"] })
 
 export default function ClientLayout({
@@ -15,6 +17,13 @@ export default function ClientLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
@@ -28,6 +37,7 @@ export default function ClientLayout({
           disableTransitionOnChange={false}
           storageKey="arabic-profile-theme"
         >
+            {mounted && <PageLoading />}
           <Navbar />
           <main className="min-h-screen">
             <AnimatePresence mode="wait">
@@ -43,6 +53,7 @@ export default function ClientLayout({
             </AnimatePresence>
           </main>
           <Footer />
+          <ServiceRequestWrapper />
         </ThemeProvider>
       </body>
     </html>
