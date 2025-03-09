@@ -36,7 +36,7 @@ export default function SkillsSection({
   // Function to get CSS color variable from percentage
   const getColorFromPercentage = (percentage: number, color?: string) => {
     if (color) return color
-    if (percentage >= 90) return "var(--primary)"
+    if (percentage >= 90) return "hsl(19, 70%, 41%)"
     if (percentage >= 75) return "hsl(169, 70%, 41%)"
     if (percentage >= 60) return "hsl(215, 80%, 56%)"
     return "hsl(215, 20%, 65%)"

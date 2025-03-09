@@ -32,6 +32,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "الرئيسية" },
     { href: "/about", label: "من أنا" },
+    { href: "/projects", label: "أعمالي" },
     { href: "/blog", label: "المدونة" },
   ]
 
