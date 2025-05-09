@@ -11,6 +11,7 @@ import SkillsSection from "@/components/skills-section"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import { fetchAll } from "@/lib/api"
+import { getIcon } from "@/lib/icons"
 
 export default async function Home() {
   const { services, projects, testimonials, settings } = await fetchAll()
@@ -50,7 +51,7 @@ export default async function Home() {
                 <ServiceCard 
                   title={service.title} 
                   description={service.description} 
-                  icon={service.icon} 
+                  icon={getIcon(service.icon)} 
                 />
               </AnimatedSection>
             ))}
