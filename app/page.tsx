@@ -10,8 +10,11 @@ import AnimatedBackground from "@/components/animated-background"
 import SkillsSection from "@/components/skills-section"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
+import { fetchAll } from "@/lib/api"
 
-export default function Home() {
+export default async function Home() {
+  const { services, projects, testimonials, settings } = await fetchAll()
+
   return (
     <div>
       {/* Hero Section */}
@@ -21,10 +24,10 @@ export default function Home() {
           <AnimatedSection animation="fadeIn">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                مرحباً، أنا <AnimatedText text="Eshaq Qasem" className="text-primary" />
+                مرحباً، أنا <AnimatedText text={settings.site_name} className="text-primary" />
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
-                مطور ويب متخصص في بناء تطبيقات الويب الحديثة والمواقع الإلكترونية المتميزة
+                {settings.site_description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <WhatsAppButton size="lg" className="hover-lift" />
@@ -42,47 +45,13 @@ export default function Home() {
         <div className="container">
           <SectionHeading title="الخدمات" subtitle="أقدم مجموعة متنوعة من الخدمات لتلبية احتياجاتك التقنية" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "تطوير الواجهة الأمامية",
-                description:
-                  "تصميم وتطوير واجهات مستخدم جذابة وسهلة الاستخدام باستخدام أحدث التقنيات مثل React و Next.js",
-                icon: Layout,
-                delay: 0,
-              },
-              {
-                title: "تطوير الواجهة الخلفية",
-                description: "بناء خدمات API قوية وقابلة للتوسع باستخدام Node.js و Express و MongoDB",
-                icon: Code,
-                delay: 0.1,
-              },
-              {
-                title: "تطوير تطبيقات الجوال",
-                description: "إنشاء تطبيقات جوال متعددة المنصات باستخدام React Native",
-                icon: Smartphone,
-                delay: 0.2,
-              },
-              {
-                title: "قواعد البيانات",
-                description: "تصميم وإدارة قواعد البيانات المختلفة مثل SQL و NoSQL",
-                icon: Database,
-                delay: 0.3,
-              },
-              {
-                title: "تحليل البيانات",
-                description: "تحليل البيانات وإنشاء لوحات معلومات تفاعلية لمساعدتك في اتخاذ قرارات أفضل",
-                icon: LineChart,
-                delay: 0.4,
-              },
-              {
-                title: "أمن المعلومات",
-                description: "تأمين تطبيقاتك ومواقعك ضد التهديدات الإلكترونية المختلفة",
-                icon: Shield,
-                delay: 0.5,
-              },
-            ].map((service, index) => (
-              <AnimatedSection key={index} delay={service.delay} className="hover-scale">
-                <ServiceCard title={service.title} description={service.description} icon={service.icon} />
+            {services.map((service, index) => (
+              <AnimatedSection key={service.id} delay={index * 0.1} className="hover-scale">
+                <ServiceCard 
+                  title={service.title} 
+                  description={service.description} 
+                  icon={service.icon} 
+                />
               </AnimatedSection>
             ))}
           </div>
@@ -94,36 +63,10 @@ export default function Home() {
         <div className="container">
           <SectionHeading title="المشاريع" subtitle="بعض المشاريع التي قمت بتطويرها" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                id: "project1",
-                title: "منصة تعليمية",
-                description:
-                  "منصة تعليمية متكاملة تتيح للمعلمين إنشاء دورات تعليمية وللطلاب الاشتراك فيها ومتابعة تقدمهم",
-                  image: "/imags/blog/7.webp",
-                tags: ["Next.js", "Node.js", "MongoDB"],
-                delay: 0,
-              },
-              {
-                id: "project2",
-                title: "متجر إلكتروني",
-                description: "متجر إلكتروني متكامل مع نظام دفع وإدارة مخزون وسلة تسوق",
-                image: "/imags/blog/8.png",
-                tags: ["React", "Express", "Stripe", "PostgreSQL"],
-                delay: 0.1,
-              },
-              {
-                id: "project3",
-                title: "تطبيق إدارة المهام",
-                description: "تطبيق لإدارة المهام والمشاريع مع إمكانية تتبع الوقت والتعاون مع الفريق",
-                image: "/imags/blog/9.png",
-                tags: ["React Native", "Firebase", "Redux"],
-                delay: 0.2,
-              },
-            ].map((project) => (
-              <AnimatedSection key={project.id} delay={project.delay} className="hover-scale">
+            {projects.map((project) => (
+              <AnimatedSection key={project.id} delay={project.order_column * 0.1} className="hover-scale">
                 <ProjectCard
-                  id={project.id}
+                  id={project.id.toString()}
                   title={project.title}
                   description={project.description}
                   image={project.image}
@@ -142,33 +85,32 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
-      {/* Skills Section - Modern Design */}
+      {/* Skills Section */}
       <AnimatedSection className="py-20" animation="fadeIn">
-       <SkillsSection
-  categories={[
-    {
-      title: "مهارات الواجهة الأمامية",
-      skills: [
-        { name: "HTML/CSS", percentage: 95 },
-        { name: "JavaScript", percentage: 90 },
-        { name: "React", percentage: 85 },
-        { name: "Next.js", percentage: 80 },
-        { name: "Tailwind CSS", percentage: 90 },
-      ],
-    },
-    {
-      title: "مهارات الواجهة الخلفية",
-      skills: [
-        { name: "Node.js", percentage: 85 },
-        { name: "Express", percentage: 80 },
-        { name: "MongoDB", percentage: 75 },
-        { name: "SQL", percentage: 70 },
-        { name: "GraphQL", percentage: 65 },
-      ],
-    },
-  ]}
-/>
-
+        <SkillsSection
+          categories={[
+            {
+              title: "مهارات الواجهة الأمامية",
+              skills: [
+                { name: "HTML/CSS", percentage: 95 },
+                { name: "JavaScript", percentage: 90 },
+                { name: "React", percentage: 85 },
+                { name: "Next.js", percentage: 80 },
+                { name: "Tailwind CSS", percentage: 90 },
+              ],
+            },
+            {
+              title: "مهارات الواجهة الخلفية",
+              skills: [
+                { name: "Node.js", percentage: 85 },
+                { name: "Express", percentage: 80 },
+                { name: "MongoDB", percentage: 75 },
+                { name: "SQL", percentage: 70 },
+                { name: "GraphQL", percentage: 65 },
+              ],
+            },
+          ]}
+        />
       </AnimatedSection>
 
       {/* Technologies Used Section */}
@@ -176,20 +118,7 @@ export default function Home() {
         <div className="container">
           <SectionHeading title="التقنيات التي استخدمها" subtitle="أدوات وتقنيات أستخدمها في مشاريعي" />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[
-              "JavaScript",
-              "TypeScript",
-              "React",
-              "Next.js",
-              "Node.js",
-              "Express",
-              "MongoDB",
-              "PostgreSQL",
-              "GraphQL",
-              "Redux",
-              "Tailwind CSS",
-              "Git",
-            ].map((tech, index) => (
+            {projects.flatMap(project => project.technologies).filter((tech, index, self) => self.indexOf(tech) === index).map((tech, index) => (
               <AnimatedSection
                 key={tech}
                 delay={index * 0.05}
@@ -210,39 +139,8 @@ export default function Home() {
         <div className="container">
           <SectionHeading title="آراء العملاء" subtitle="ما يقوله العملاء عن خدماتي" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                name: "محمد أحمد",
-                role: "المدير التنفيذي",
-                company: "شركة تقنية",
-                content:
-                  "تعاملت مع أحمد في مشروع تطوير موقع الشركة، وكان العمل معه ممتازًا. التزم بالمواعيد وقدم عملًا عالي الجودة.",
-                avatar: "/placeholder.svg?height=100&width=100",
-                rating: 5,
-                delay: 0,
-              },
-              {
-                name: "سارة محمود",
-                role: "مديرة التسويق",
-                company: "شركة إعلانية",
-                content:
-                  "ساعدنا أحمد في تطوير منصة تسويقية متكاملة، وكانت النتائج مبهرة. سرعة في الاستجابة ودقة في التنفيذ.",
-                avatar: "/placeholder.svg?height=100&width=100",
-                rating: 4,
-                delay: 0.1,
-              },
-              {
-                name: "خالد عبدالله",
-                role: "مؤسس",
-                company: "شركة ناشئة",
-                content:
-                  "كان أحمد شريكًا تقنيًا ممتازًا في رحلة إطلاق شركتنا الناشئة. ساعدنا في بناء المنتج من الصفر وتجاوز التحديات التقنية.",
-                avatar: "/placeholder.svg?height=100&width=100",
-                rating: 5,
-                delay: 0.2,
-              },
-            ].map((testimonial, index) => (
-              <AnimatedSection key={index} delay={testimonial.delay} className="hover-scale">
+            {testimonials.map((testimonial, index) => (
+              <AnimatedSection key={testimonial.id} delay={index * 0.1} className="hover-scale">
                 <TestimonialCard
                   name={testimonial.name}
                   role={testimonial.role}
