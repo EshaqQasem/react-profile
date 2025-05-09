@@ -20,14 +20,15 @@ export default function ProjectPage() {
   const [project, setProject] = useState<Project | null>(null)
   const [relatedProjects, setRelatedProjects] = useState<Project[]>([])
   const [isLoading, setIsLoading] = useState(true)
-
+  const showRelatedProjects = false;
   useEffect(() => {
+   
     const loadProject = async () => {
       try {
         const data = await fetchProject(projectId)
         setProject(data)
 
-        if (data) {
+        if (data && showRelatedProjects) {
           // Fetch all projects to get related ones
           const allProjects = await fetchProjects()
           const related = allProjects
@@ -202,7 +203,7 @@ export default function ProjectPage() {
         </div>
 
         {/* Related Projects */}
-        {relatedProjects.length > 0 && (
+        {showRelatedProjects && relatedProjects.length > 0 && (
           <AnimatedSection className="mt-16" animation="fadeIn" delay={0.3}>
             <h2 className="text-2xl font-bold mb-8">مشاريع ذات صلة</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
