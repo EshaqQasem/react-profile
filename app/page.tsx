@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Code, Database, Download, Layout, LineChart, Shield, Smartphone } from "lucide-react"
+import { ArrowRight, Code, Download } from "lucide-react"
 import AnimatedText from "@/components/animated-text"
 import SectionHeading from "@/components/section-heading"
 import ProjectCard from "@/components/project-card"
