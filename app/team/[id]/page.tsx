@@ -9,13 +9,13 @@ import { Download, Mail, Phone, MapPin, Calendar, Briefcase, GraduationCap } fro
 import { Card, CardContent } from "@/components/ui/card"
 import AnimatedSection from "@/components/animated-section"
 import { useParams } from "next/navigation"
-import { fetchTeamMember, type TeamMember } from "@/lib/api"
+import { fetchTeamMember, type TeamMemberDetails } from "@/lib/api"
 
 export default function TeamMemberPage() {
   const params = useParams()
   const memberId = params?.id as string
 
-  const [member, setMember] = useState<TeamMember | null>(null)
+  const [member, setMember] = useState<TeamMemberDetails | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
