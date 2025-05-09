@@ -21,7 +21,7 @@ export default function Home() {
           <AnimatedSection animation="fadeIn">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                مرحباً، أنا <AnimatedText text="يعقوب الحيدري" className="text-primary" />
+                مرحباً، أنا <AnimatedText text="Eshaq Qasem" className="text-primary" />
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
                 مطور ويب متخصص في بناء تطبيقات الويب الحديثة والمواقع الإلكترونية المتميزة
