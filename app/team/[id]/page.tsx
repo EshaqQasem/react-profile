@@ -82,10 +82,7 @@ export default function TeamMemberPage() {
                 <MapPin className="h-5 w-5 text-primary" />
                 <span>{member.location}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-primary" />
-                <span>{member.birthDate}</span>
-              </div>
+              
             </div>
             <Button asChild>
               <Link href={member.resume} download>
