@@ -10,11 +10,13 @@ import AnimatedBackground from "@/components/animated-background"
 import SkillsSection from "@/components/skills-section"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
+import TeamSlider from "@/components/team-slider"
+
 import { fetchAll } from "@/lib/api"
 import { getIcon } from "@/lib/icons"
 
 export default async function Home() {
-  const { services, projects, testimonials, settings } = await fetchAll()
+  const { services, projects, members, testimonials, settings } = await fetchAll()
 
   return (
     <div>
@@ -132,6 +134,16 @@ export default async function Home() {
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection className="py-20 bg-muted/50" id="team" animation="fadeIn">
+        <div className="container">
+          <SectionHeading 
+            title="فريقنا" 
+            subtitle="تعرف على فريق العمل المتميز الذي يقف خلف نجاح مشاريعنا" 
+          />
+          <TeamSlider members={members} />
         </div>
       </AnimatedSection>
 

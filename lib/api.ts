@@ -69,10 +69,24 @@ interface Settings {
   }
 }
 
+
+interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  social_links?: {
+    twitter?: string;
+    linkedin?: string;
+    github?: string;
+  };
+}
+
 interface ApiResponse {
   services: Service[]
   projects: Project[]
-  testimonials: Testimonial[]
+  members : TeamMember[],
+  testimonials: Testimonial[],
   settings: Settings
 }
 
@@ -86,7 +100,9 @@ export async function fetchAll(): Promise<ApiResponse> {
     return {
       services: [],
       projects: [],
+      members: [],
       testimonials: [],
+  
       settings: {
         id: 1,
         site_name: '',
