@@ -105,11 +105,11 @@ export default function ProjectPage() {
             </div>
 
             <div className="space-y-4 mb-8">
-              {project.fullDescription.map((paragraph, index) => (
-                <p key={index} className="text-muted-foreground">
-                  {paragraph}
+              {/* {project.fullDescription.map((paragraph, index) => ( */}
+                <p className="text-muted-foreground">
+                  {project.fullDescription}
                 </p>
-              ))}
+              {/* ))} */}
             </div>
 
             <h2 className="text-2xl font-bold mb-4">المميزات</h2>
