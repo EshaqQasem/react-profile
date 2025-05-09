@@ -12,26 +12,26 @@ interface Service {
   deleted_at: string | null
 }
 
-interface Project {
-  id: number
-  title: string
-  description: string
-  tags: string[]
-  is_active: boolean
-  order_column: number
-  updated_at: string
-  deleted_at: string | null
-  full_description: string[]
-  features: string[]
-  technologies: string[]
-  image: string
-  gallery: string[]
-  client: string
-  date: string
-  duration: string
-  website: string
-  github: string
-}
+// interface Project {
+//   id: number
+//   title: string
+//   description: string
+//   tags: string[]
+//   is_active: boolean
+//   order_column: number
+//   updated_at: string
+//   deleted_at: string | null
+//   full_description: string[]
+//   features: string[]
+//   technologies: string[]
+//   image: string
+//   gallery: string[]
+//   client: string
+//   date: string
+//   duration: string
+//   website: string
+//   github: string
+// }
 
 interface Testimonial {
   id: number
@@ -139,16 +139,16 @@ export async function fetchServices(): Promise<Service[]> {
   }
 }
 
-export async function fetchProjects(): Promise<Project[]> {
-  try {
-    const response = await fetch(`${API_BASE_URL}/projects`)
-    if (!response.ok) throw new Error('Failed to fetch projects')
-    return response.json()
-  } catch (error) {
-    console.error('Error fetching projects:', error)
-    return []
-  }
-}
+// export async function fetchProjects(): Promise<Project[]> {
+//   try {
+//     const response = await fetch(`${API_BASE_URL}/projects`)
+//     if (!response.ok) throw new Error('Failed to fetch projects')
+//     return response.json()
+//   } catch (error) {
+//     console.error('Error fetching projects:', error)
+//     return []
+//   }
+// }
 
 export async function fetchTestimonials(): Promise<Testimonial[]> {
   try {
@@ -169,5 +169,49 @@ export async function fetchTechnologies() {
   } catch (error) {
     console.error('Error fetching technologies:', error)
     return []
+  }
+} 
+
+export interface Project {
+  id: string
+  title: string
+  description: string
+  fullDescription: string[]
+  features: string[]
+  technologies: string[]
+  image: string
+  gallery: string[]
+  client: string
+  date: string
+  duration: string
+  website?: string
+  github?: string
+  tags: string[]
+  order_column: number
+}
+
+export async function fetchProjects(): Promise<Project[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/projects`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch projects')
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+    return []
+  }
+}
+
+export async function fetchProject(id: string): Promise<Project | null> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/projects/${id}`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch project')
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching project:', error)
+    return null
   }
 } 

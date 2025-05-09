@@ -1,4 +1,6 @@
 "use client"
+
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -8,213 +10,51 @@ import { ArrowLeft, Globe, Github, Calendar } from "lucide-react"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import ProjectCard from "@/components/project-card"
-import { useParams } from "next/navigation";
-
-const  projects = [
-  {
-    id: "project1",
-    title: "منصة تعليمية",
-    description: "منصة تعليمية متكاملة تتيح للمعلمين إنشاء دورات تعليمية وللطلاب الاشتراك فيها ومتابعة تقدمهم",
-    fullDescription: [
-      "قمت بتطوير منصة تعليمية متكاملة تهدف إلى تسهيل عملية التعليم عن بعد وتوفير بيئة تفاعلية للمعلمين والطلاب.",
-      "تتيح المنصة للمعلمين إنشاء دورات تعليمية وإضافة محتوى متنوع مثل الفيديوهات والملفات والاختبارات، كما تمكن الطلاب من الاشتراك في الدورات ومتابعة تقدمهم وأداء الاختبارات.",
-      "استخدمت في هذا المشروع تقنيات حديثة مثل Next.js للواجهة الأمامية وNode.js للواجهة الخلفية وMongoDB لقاعدة البيانات، مما يوفر أداءً سريعًا وتجربة مستخدم سلسة.",
-    ],
-    features: [
-      "نظام تسجيل وإدارة المستخدمين",
-      "إنشاء وإدارة الدورات التعليمية",
-      "رفع وعرض محتوى متنوع (فيديو، PDF، صور)",
-      "نظام اختبارات متكامل",
-      "لوحة تحكم للمعلمين والإداريين",
-      "تتبع تقدم الطلاب وإحصائيات",
-      "نظام مدفوعات واشتراكات",
-      "واجهة مستخدم سهلة الاستخدام ومتجاوبة",
-    ],
-    technologies: ["Next.js", "Node.js", "Express", "MongoDB", "Redux", "Tailwind CSS", "AWS S3", "Stripe"],
-    image: "/imags/blog/7.webp",
-    gallery: [
-      "/imags/blog/7.webp",
-      "/imags/blog/7.webp",
-      "/imags/blog/7.webp",
-      "/imags/blog/7.webp",
-    ],
-    client: "شركة تعليمية",
-    date: "يناير 2023",
-    duration: "4 أشهر",
-    website: "https://yacoubalhaidari.com/",
-    github: "https://github.com/YacoubAl-hardari/react-profile",
-    tags: ["Next.js", "Node.js", "MongoDB"],
-  },
-  {
-    id: "project2",
-    title: "متجر إلكتروني",
-    description: "متجر إلكتروني متكامل مع نظام دفع وإدارة مخزون وسلة تسوق",
-    fullDescription: [
-      "قمت بتطوير متجر إلكتروني متكامل يتيح للشركات عرض وبيع منتجاتها عبر الإنترنت بطريقة سهلة وآمنة.",
-      "يتضمن المتجر نظام إدارة منتجات متكامل، وسلة تسوق، ونظام دفع آمن، وإدارة للمخزون، وتتبع للطلبات، بالإضافة إلى لوحة تحكم للإداريين.",
-      "استخدمت في هذا المشروع React للواجهة الأمامية وExpress للواجهة الخلفية وPostgreSQL لقاعدة البيانات، مع دمج Stripe لمعالجة المدفوعات.",
-    ],
-    features: [
-      "عرض وتصفح المنتجات بطريقة سهلة",
-      "البحث والتصفية حسب الفئات والأسعار",
-      "سلة تسوق متكاملة",
-      "نظام دفع آمن باستخدام Stripe",
-      "إدارة المخزون والطلبات",
-      "حسابات المستخدمين وتتبع الطلبات",
-      "لوحة تحكم للإداريين",
-      "تصميم متجاوب لجميع الأجهزة",
-    ],
-    technologies: ["React", "Express", "PostgreSQL", "Redux", "Stripe", "Material UI", "Docker", "AWS"],
-    image: "/imags/blog/8.png",
-    gallery: [
-      "/imags/blog/8.png",
-      "/imags/blog/8.png",
-      "/imags/blog/8.png",
-      "/imags/blog/8.png",
-    ],
-    client: "شركة تجارية",
-    date: "مارس 2023",
-    duration: "3 أشهر",
-    website: "https://yacoubalhaidari.com/",
-    github: "https://github.com/YacoubAl-hardari/react-profile",
-    tags: ["React", "Express", "Stripe", "PostgreSQL"],
-  },
-  {
-    id: "project3",
-    title: "تطبيق إدارة المهام",
-    description: "تطبيق لإدارة المهام والمشاريع مع إمكانية تتبع الوقت والتعاون مع الفريق",
-    fullDescription: [
-      "قمت بتطوير تطبيق لإدارة المهام والمشاريع يساعد الأفراد والفرق على تنظيم عملهم وزيادة إنتاجيتهم.",
-      "يتيح التطبيق إنشاء وتنظيم المهام في مشاريع ولوحات، وتعيين المهام لأعضاء الفريق، وتتبع الوقت المستغرق، ووضع مواعيد نهائية وتذكيرات.",
-      "استخدمت في هذا المشروع React Native لتطوير تطبيق متعدد المنصات يعمل على أجهزة iOS وAndroid، مع Firebase للتخزين والمصادقة وRedux لإدارة حالة التطبيق.",
-    ],
-    features: [
-      "إنشاء وتنظيم المهام والمشاريع",
-      "تعيين المهام لأعضاء الفريق",
-      "تتبع الوقت المستغرق في المهام",
-      "وضع مواعيد نهائية وتذكيرات",
-      "مشاركة الملفات والتعليقات",
-      "لوحات كانبان لتتبع سير العمل",
-      "تقارير وإحصائيات",
-      "إشعارات في الوقت الحقيقي",
-    ],
-    technologies: ["React Native", "Firebase", "Redux", "Expo", "Cloud Functions", "Jest", "GitHub Actions"],
-    image: "/imags/blog/9.png",
-    gallery: [
-      "/imags/blog/9.png",
-      "/imags/blog/9.png",
-      "/imags/blog/9.png",
-      "/imags/blog/9.png",
-    ],
-    client: "شركة برمجيات",
-    date: "مايو 2023",
-    duration: "2 أشهر",
-    website: "https://yacoubalhaidari.com/",
-    github: "https://github.com/YacoubAl-hardari/react-profile",
-    tags: ["React Native", "Firebase", "Redux"],
-  },
-  {
-    "id": "project4",
-    "title": "تطبيق محادثة",
-    "description": "تطبيق محادثة في الوقت الحقيقي مع دعم الرسائل النصية والصوتية والفيديو",
-    "fullDescription": [
-      "تم تطوير هذا التطبيق ليكون منصة تواصل متكاملة، تدعم المحادثات الفردية والجماعية، مع إمكانية إرسال الرسائل النصية والصوتية ومكالمات الفيديو بجودة عالية.",
-      "يعتمد التطبيق على تقنيات WebRTC لضمان تجربة اتصال سلسة، مع Socket.io لتحديث المحادثات بشكل لحظي.",
-      "يتم تخزين البيانات بشكل آمن باستخدام MongoDB، مع تشفير الرسائل لحماية خصوصية المستخدمين."
-    ],
-    "features": [
-      "دعم المحادثات النصية والصوتية والفيديو",
-      "إمكانية إنشاء مجموعات دردشة",
-      "إشعارات لحظية عند استقبال رسائل جديدة",
-      "مشاركة الصور والملفات",
-      "نظام حالات (Stories) يظهر للمستخدمين لفترة محدودة",
-      "تشفير البيانات لضمان الأمان والخصوصية"
-    ],
-    "technologies": ["React", "Socket.io", "WebRTC", "MongoDB"],
-    "image": "/imags/blog/9.webp",
-    "gallery": [
-      "/imags/blog/9.webp",
-      "/imags/blog/9.webp",
-      "/imags/blog/9.webp"
-    ],
-    "client": "منصة اجتماعية ناشئة",
-    "date": "يناير 2024",
-    "duration": "3 أشهر",
-    "website": "https://example.com",
-    "github": "https://github.com/example/chat-app",
-    "tags": ["React", "Socket.io", "WebRTC", "MongoDB"]
-  },
-  {
-    "id": "project5",
-    "title": "لوحة تحكم إدارية",
-    "description": "لوحة تحكم إدارية متكاملة لإدارة المحتوى والمستخدمين والإحصائيات",
-    "fullDescription": [
-      "لوحة تحكم احترافية توفر واجهة مرنة لإدارة المستخدمين، المحتوى، والصلاحيات، مع تقارير متقدمة عن أداء النظام.",
-      "يتميز النظام بتجربة مستخدم سلسة باستخدام Tailwind CSS، مع أمان عالي بفضل Prisma لإدارة قاعدة البيانات.",
-      "يدعم العمل مع قواعد بيانات متعددة، مع عمليات تدقيق وتسجيل النشاطات لضمان الموثوقية."
-    ],
-    "features": [
-      "إدارة المستخدمين والصلاحيات",
-      "تحليلات وإحصائيات متقدمة",
-      "دعم الوضع الداكن والواجهة التفاعلية",
-      "تصدير البيانات بتنسيقات مختلفة (Excel، PDF)",
-      "تكامل مع خدمات خارجية عبر API",
-      "دعم تعدد اللغات"
-    ],
-    "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "Prisma"],
-    "image": "/imags/blog/10.png",
-    "gallery": [
-      "/imags/blog/10.png",
-      "/imags/blog/10.png",
-      "/imags/blog/10.png"
-    ],
-    "client": "شركة تقنية متخصصة في تحليل البيانات",
-    "date": "مارس 2024",
-    "duration": "2.5 أشهر",
-    "website": "https://example.com",
-    "github": "https://github.com/example/admin-dashboard",
-    "tags": ["Next.js", "TypeScript", "Tailwind CSS", "Prisma"]
-  },
-  {
-    "id": "project6",
-    "title": "موقع شخصي",
-    "description": "موقع شخصي احترافي لعرض الأعمال والمهارات والخبرات",
-    "fullDescription": [
-      "تم تصميم الموقع ليكون منصة احترافية تعكس هوية المستخدم، مع قسم للأعمال السابقة والمدونة والتواصل.",
-      "يتميز الموقع بتصميم ديناميكي يعتمد على Framer Motion لتحسين التفاعل البصري وتجربة المستخدم.",
-      "يدعم التحميل السريع والتجاوب مع جميع الأجهزة، مع تحسينات لمحركات البحث (SEO)."
-    ],
-    "features": [
-      "معرض أعمال متكامل",
-      "مدونة شخصية لإضافة المقالات",
-      "تأثيرات بصرية جذابة باستخدام Framer Motion",
-      "صفحة تواصل ديناميكية مع نموذج اتصال",
-      "تحسينات SEO لضمان ظهور الموقع في نتائج البحث",
-      "دعم الوضع الداكن والواجهة التفاعلية"
-    ],
-    "technologies": ["React", "Framer Motion", "Tailwind CSS"],
-    "image": "/imags/blog/11.jpg",
-    "gallery": [
-      "/imags/blog/11.jpg",
-      "/imags/blog/11.jpg",
-      "/imags/blog/11.jpg"
-    ],
-    "client": "مطور ويب مستقل",
-    "date": "فبراير 2024",
-    "duration": "1.5 شهر",
-    "website": "https://example.com",
-    "github": "https://github.com/example/personal-website",
-    "tags": ["React", "Framer Motion", "Tailwind CSS"]
-  }
-
-]
+import { useParams } from "next/navigation"
+import { fetchProject, fetchProjects, type Project } from "@/lib/api"
 
 export default function ProjectPage() {
+  const params = useParams()
+  const projectId = params?.id as string
 
-     const params = useParams();
-     const projectId = params?.id; 
+  const [project, setProject] = useState<Project | null>(null)
+  const [relatedProjects, setRelatedProjects] = useState<Project[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
-      const project = projects.find((p) => p.id === projectId);
+  useEffect(() => {
+    const loadProject = async () => {
+      try {
+        const data = await fetchProject(projectId)
+        setProject(data)
+
+        if (data) {
+          // Fetch all projects to get related ones
+          const allProjects = await fetchProjects()
+          const related = allProjects
+            .filter((p) => p.id !== data.id)
+            .filter((p) => p.tags.some((tag) => data.tags.includes(tag)))
+            .slice(0, 3)
+          setRelatedProjects(related)
+        }
+      } catch (error) {
+        console.error('Error loading project:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadProject()
+  }, [projectId])
+
+  if (isLoading) {
+    return (
+      <div className="container py-12">
+        <div className="text-center">
+          <p className="text-muted-foreground">جاري تحميل المشروع...</p>
+        </div>
+      </div>
+    )
+  }
 
   // If project not found, show error
   if (!project) {
@@ -228,12 +68,6 @@ export default function ProjectPage() {
       </div>
     )
   }
-
-  // Related projects (excluding current project)
-  const relatedProjects = projects
-    .filter((p) => p.id !== project.id)
-    .filter((p) => p.tags.some((tag) => project.tags.includes(tag)))
-    .slice(0, 3)
 
   return (
     <div className="py-12">
@@ -256,7 +90,7 @@ export default function ProjectPage() {
         </AnimatedSection>
 
         {/* Project Info */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <AnimatedSection className="lg:col-span-2" animation="fadeInUp" delay={0.1}>
             <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
@@ -296,7 +130,7 @@ export default function ProjectPage() {
             </div>
 
             <h2 className="text-2xl font-bold mb-4">معرض الصور</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.gallery.map((image, index) => (
                 <div key={index} className="relative h-[200px] rounded-lg overflow-hidden hover-scale">
                   <Image
@@ -386,8 +220,6 @@ export default function ProjectPage() {
             </div>
           </AnimatedSection>
         )}
-
-      
       </div>
     </div>
   )

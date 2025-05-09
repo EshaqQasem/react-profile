@@ -8,64 +8,38 @@ import ProjectCard from "@/components/project-card"
 import SectionHeading from "@/components/section-heading"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
-
-// Sample projects data
-const projects = [
-  {
-    id: "project1",
-    title: "منصة تعليمية",
-    description: "منصة تعليمية متكاملة تتيح للمعلمين إنشاء دورات تعليمية وللطلاب الاشتراك فيها ومتابعة تقدمهم",
-      image: "/imags/blog/7.webp",
-    tags: ["Next.js", "Node.js", "MongoDB"],
-  },
-  {
-    id: "project2",
-    title: "متجر إلكتروني",
-    description: "متجر إلكتروني متكامل مع نظام دفع وإدارة مخزون وسلة تسوق",
-      image: "/imags/blog/8.png",
-    tags: ["React", "Express", "Stripe", "PostgreSQL"],
-  },
-  {
-    id: "project3",
-    title: "تطبيق إدارة المهام",
-    description: "تطبيق لإدارة المهام والمشاريع مع إمكانية تتبع الوقت والتعاون مع الفريق",
-      image: "/imags/blog/9.png",
-    tags: ["React Native", "Firebase", "Redux"],
-  },
-  {
-    id: "project4",
-    title: "تطبيق محادثة",
-    description: "تطبيق محادثة في الوقت الحقيقي مع دعم الرسائل النصية والصوتية والفيديو",
-      image: "/imags/blog/9.webp",
-    tags: ["React", "Socket.io", "WebRTC", "MongoDB"],
-  },
-  {
-    id: "project5",
-    title: "لوحة تحكم إدارية",
-    description: "لوحة تحكم إدارية متكاملة لإدارة المحتوى والمستخدمين والإحصائيات",
-      image: "/imags/blog/10.png",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma"],
-  },
-  {
-    id: "project6",
-    title: "موقع شخصي",
-    description: "موقع شخصي احترافي لعرض الأعمال والمهارات والخبرات",
-      image: "/imags/blog/11.jpg",
-    tags: ["React", "Framer Motion", "Tailwind CSS"],
-  }
-]
-
-
-// All unique tags from projects
-const allTags = Array.from(new Set(projects.flatMap((project) => project.tags)))
+import { fetchProjects, type Project } from "@/lib/api"
 
 export default function ProjectsPage() {
-  // State for search and filter
+  // State for projects and UI
+  const [projects, setProjects] = useState<Project[]>([])
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTag, setSelectedTag] = useState("الكل")
-  const [filteredProjects, setFilteredProjects] = useState(projects)
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([])
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Fetch projects on component mount
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const data = await fetchProjects()
+        setProjects(data)
+        setFilteredProjects(data)
+      } catch (error) {
+        console.error('Error loading projects:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadProjects()
+  }, [])
+
+  // Get all unique tags from projects
+  const allTags = Array.from(new Set(projects.flatMap((project) => project.tags)))
+
   // Filter projects based on search query and selected tag
   useEffect(() => {
     let result = projects
@@ -87,23 +61,33 @@ export default function ProjectsPage() {
     }
 
     setFilteredProjects(result)
-  }, [searchQuery, selectedTag])
+  }, [searchQuery, selectedTag, projects])
+
+  // Handle window resize
   useEffect(() => {
-    // Check window width after component mounts
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 768)
     }
     
-    // Initial check
     handleResize()
-    // Add resize listener
     window.addEventListener('resize', handleResize)
     
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
   // Toggle filter menu on mobile
   const toggleFilterMenu = () => {
     setIsFilterMenuOpen(!isFilterMenuOpen)
+  }
+
+  if (isLoading) {
+    return (
+      <div className="container py-12">
+        <div className="text-center">
+          <p className="text-muted-foreground">جاري تحميل المشاريع...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -118,7 +102,7 @@ export default function ProjectsPage() {
         </AnimatedSection>
 
         {/* Search and Filter */}
-        <AnimatedSection className="mb-12" animation="fadeInUp" delay={0.1}>
+        <AnimatedSection className="mb-8" animation="fadeIn">
           <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
             <div className="w-full md:w-1/3 relative">
               <Input
@@ -141,9 +125,9 @@ export default function ProjectsPage() {
 
         {/* Tags Filter */}
         <AnimatedSection
-             className={`mb-8 ${isFilterMenuOpen || isDesktop ? "block" : "hidden md:block"}`}
-             animation="fadeInUp"
-             delay={0.2}
+          className={`mb-8 ${isFilterMenuOpen || isDesktop ? "block" : "hidden md:block"}`}
+          animation="fadeInUp"
+          delay={0.2}
         >
           <div className="flex flex-wrap gap-2">
             <Button
@@ -169,7 +153,7 @@ export default function ProjectsPage() {
         </AnimatedSection>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project, index) => (
               <AnimatedSection key={project.id} delay={0.1 + index * 0.05} className="hover-scale">
