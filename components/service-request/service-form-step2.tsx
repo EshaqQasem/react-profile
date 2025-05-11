@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ArrowLeft } from "lucide-react"
+import {fetchServices, type Service} from "@/lib/api"
 
 interface ServiceFormStep2Props {
   formData: {
@@ -35,6 +36,23 @@ export default function ServiceFormStep2({
     serviceType: "",
     description: "",
   })
+
+  const [services, setServices] = useState<Service[]>([])
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        const data = await fetchServices()
+        setServices(data)
+      } catch (error) {
+        console.error('Error loading Services:', error)
+      } finally {
+        // setIsLoading(false)
+      }
+    }
+
+    loadServices()
+
+  }, [])
 
   const handleSelectChange = (value: string) => {
     updateFormData({ ...formData, serviceType: value })

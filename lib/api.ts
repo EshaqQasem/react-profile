@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.technovizen.com/api'
 
-interface Service {
+export interface Service {
   id: number
   title: string
   description: string

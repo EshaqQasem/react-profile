@@ -33,12 +33,12 @@ export default async function Home() {
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
                 {settings.site_description}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* <div className="flex flex-col sm:flex-row gap-4">
                 <WhatsAppButton size="lg" className="hover-lift" />
                 <Button size="lg" variant="outline" asChild className="hover-lift">
                   <Link href="/projects">عرض أعمالي</Link>
                 </Button>
-              </div>
+              </div> */}
             </div>
           </AnimatedSection>
         </div>

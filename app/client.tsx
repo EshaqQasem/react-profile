@@ -26,7 +26,7 @@ export default  function ClientLayout({
   const [settings, setSettings] = useState<Settings | null>(null)
 
   useEffect(() => {
-    const loadMember = async () => {
+    const loadSettings = async () => {
       try {
         const data = await fetchSettings()
         setSettings(data)
@@ -37,7 +37,7 @@ export default  function ClientLayout({
       }
     }
 
-    loadMember()
+    loadSettings()
     setMounted(true)
 
   }, [])
