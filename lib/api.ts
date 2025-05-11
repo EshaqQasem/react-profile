@@ -167,7 +167,7 @@ export interface Project {
   id: string
   title: string
   description: string
-  fullDescription: string
+  full_description: string
   features: string[]
   technologies: string[]
   image: string

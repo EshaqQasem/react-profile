@@ -107,7 +107,7 @@ export default function ProjectPage() {
             <div className="space-y-4 mb-8">
               {/* {project.fullDescription.map((paragraph, index) => ( */}
                 <p className="text-muted-foreground">
-                  {project.fullDescription}
+                  {project.full_description}
                 </p>
               {/* ))} */}
             </div>
