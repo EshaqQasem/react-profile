@@ -9,6 +9,7 @@ import { Menu, X } from "lucide-react"
 import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import WhatsAppButton from "./whatsapp-button"
+import Image from "next/image"
 // import { type Settings } from "@/lib/api"
 
 interface SettingsProp{
@@ -51,10 +52,16 @@ export default function Navbar({whatsapp}: SettingsProp) {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <Link href="/" className="text-xl font-bold">
-            الملف الشخصي
-            {mounted && theme === "dark" && <span className="text-xs text-primary mr-2">وضع داكن</span>}
-            {mounted && theme === "light" && <span className="text-xs text-primary mr-2">وضع فاتح</span>}
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/imags/logo.png"
+              alt="شعار الموقع"
+              width={40}
+              height={40}
+              className="h-8 w-auto"
+            />
+            {mounted && theme === "dark" && <span className="text-xs text-primary">وضع داكن</span>}
+            {mounted && theme === "light" && <span className="text-xs text-primary">وضع فاتح</span>}
           </Link>
         </motion.div>
 
