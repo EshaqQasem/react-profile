@@ -266,6 +266,8 @@ export async function fetchTeamMember(id: string): Promise<TeamMemberDetails | n
   }
 } 
 
+
+
 export async function fetchTeamMembers(): Promise<TeamMember[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/team-members`)
