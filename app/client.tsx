@@ -50,7 +50,7 @@ export default  function ClientLayout({
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
         <meta name="color-scheme" content="light dark" />
-        <meta name="tags" content={settings?.site_name?? "tc"} />
+        <meta name="tags" content={settings?.site_name} />
       </head>
       <body className={`${cairo.className} antialiased transition-colors duration-300`}>
         <ThemeProvider
@@ -61,7 +61,7 @@ export default  function ClientLayout({
           storageKey="arabic-profile-theme"
         >
             {mounted && <PageLoading />}
-          <Navbar />
+          <Navbar whatsapp={settings?.social_network?.whatsapp ?? "71"} />
           <main className="min-h-screen">
             <AnimatePresence mode="wait">
               <motion.div
@@ -75,7 +75,10 @@ export default  function ClientLayout({
               </motion.div>
             </AnimatePresence>
           </main>
-          <Footer />
+          <Footer 
+            
+            settings={settings}
+          />
           <ServiceRequestWrapper />
         </ThemeProvider>
       </body>

@@ -9,8 +9,12 @@ import { Menu, X } from "lucide-react"
 import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import WhatsAppButton from "./whatsapp-button"
+// import { type Settings } from "@/lib/api"
 
-export default function Navbar() {
+interface SettingsProp{
+  whatsapp: string
+}
+export default function Navbar({whatsapp}: SettingsProp) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -88,7 +92,7 @@ export default function Navbar() {
               )}
             </Link>
           ))}
-          <WhatsAppButton variant="icon" size="md" showText={false} />
+          <WhatsAppButton variant="icon" size="md" showText={false} phoneNumber = {whatsapp} />
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <ColorThemeSwitcher />

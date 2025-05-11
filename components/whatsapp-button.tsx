@@ -25,7 +25,7 @@ export default function WhatsAppButton({
 
   useEffect(() => {
     // Set the WhatsApp number dynamically to prevent hydration mismatch
-    setWhatsappNumber(phoneNumber ?? "967775042349") // Fallback to default number
+    setWhatsappNumber(phoneNumber ?? "967711265925") // Fallback to default number
   }, [phoneNumber])
 
   // Do not render the link until the number is set (prevents hydration issues)

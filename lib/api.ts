@@ -151,7 +151,7 @@ export interface Project {
 
 export async function fetchSettings(): Promise<Settings | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/general-settings/`,  {
+    const response = await fetch(`${API_BASE_URL}/general-settings`,  {
       cache: 'no-store',
       next: { revalidate: 0 }
     });
