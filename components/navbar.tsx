@@ -60,8 +60,8 @@ export default function Navbar({whatsapp}: SettingsProp) {
               height={40}
               className="h-8 w-auto"
             />
-            {mounted && theme === "dark" && <span className="text-xs text-primary">وضع داكن</span>}
-            {mounted && theme === "light" && <span className="text-xs text-primary">وضع فاتح</span>}
+            {/* {mounted && theme === "dark" && <span className="text-xs text-primary">وضع داكن</span>} */}
+            {/* {mounted && theme === "light" && <span className="text-xs text-primary">وضع فاتح</span>} */}
           </Link>
         </motion.div>
 
