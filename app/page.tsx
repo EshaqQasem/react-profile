@@ -1,14 +1,14 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Code, Download } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
 import AnimatedText from "@/components/animated-text"
 import SectionHeading from "@/components/section-heading"
 import ProjectCard from "@/components/project-card"
 import ServiceCard from "@/components/service-card"
 import TestimonialCard from "@/components/testimonial-card"
 import AnimatedBackground from "@/components/animated-background"
-import SkillsSection from "@/components/skills-section"
+// import SkillsSection from "@/components/skills-section"
 import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import TeamSlider from "@/components/team-slider"
@@ -85,7 +85,7 @@ export default async function Home() {
       {/* Projects Section */}
       <AnimatedSection className="py-20 bg-muted/50" id="projects">
         <div className="container">
-          <SectionHeading title="المشاريع" subtitle="بعض المشاريع التي قمت بتطويرها" />
+          <SectionHeading title="أعمالنا" subtitle="بعض المشاريع التي قمنا بتطويرها" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
               <AnimatedSection key={project.id} delay={project.order_column * 0.1} className="hover-scale">
@@ -110,7 +110,7 @@ export default async function Home() {
       </AnimatedSection>
 
       {/* Skills Section */}
-      <AnimatedSection className="py-20" animation="fadeIn">
+      {/* <AnimatedSection className="py-20" animation="fadeIn">
         <SkillsSection
           categories={[
             {
@@ -135,10 +135,10 @@ export default async function Home() {
             },
           ]}
         />
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       {/* Technologies Used Section */}
-      <AnimatedSection className="py-20 bg-muted/50" id="technologies" animation="fadeIn">
+      {/* <AnimatedSection className="py-20 bg-muted/50" id="technologies" animation="fadeIn">
         <div className="container">
           <SectionHeading title="التقنيات التي استخدمها" subtitle="أدوات وتقنيات أستخدمها في مشاريعي" />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -156,7 +156,7 @@ export default async function Home() {
             ))}
           </div>
         </div>
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       <AnimatedSection className="py-20 bg-muted/50" id="team" animation="fadeIn">
         <div className="container">

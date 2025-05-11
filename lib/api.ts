@@ -48,7 +48,7 @@ interface Testimonial {
   deleted_at: string | null
 }
 
-interface Settings {
+export interface Settings {
   id: number
   site_name: string
   site_description: string
@@ -131,6 +131,41 @@ interface ApiResponse {
   settings: Settings
 }
 
+export interface Project {
+  id: string
+  title: string
+  description: string
+  full_description: string
+  features: string[]
+  technologies: string[]
+  image: string
+  gallery: string[]
+  client: string
+  date: string
+  duration: string
+  website?: string
+  github?: string
+  tags: string[]
+  order_column: number
+}
+
+export async function fetchSettings(): Promise<Settings | null> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/general-settings/`,  {
+      cache: 'no-store',
+      next: { revalidate: 0 }
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch settings')
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching settings:', error)
+    return null
+  }
+} 
+
 export async function fetchAll(): Promise<ApiResponse> {
   try {
     const response = await fetch(`${API_BASE_URL}/home`,  {
@@ -171,25 +206,6 @@ export async function fetchAll(): Promise<ApiResponse> {
     }
   }
 }
-
-export interface Project {
-  id: string
-  title: string
-  description: string
-  full_description: string
-  features: string[]
-  technologies: string[]
-  image: string
-  gallery: string[]
-  client: string
-  date: string
-  duration: string
-  website?: string
-  github?: string
-  tags: string[]
-  order_column: number
-}
-
 
 // Keeping these functions for backward compatibility
 export async function fetchServices(): Promise<Service[]> {
@@ -285,8 +301,6 @@ export async function fetchTeamMember(id: string): Promise<TeamMemberDetails | n
     return null
   }
 } 
-
-
 
 export async function fetchTeamMembers(): Promise<TeamMember[]> {
   try {

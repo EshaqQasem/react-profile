@@ -12,17 +12,39 @@ import PageLoading from "@/components/page-loading"
 import { useState, useEffect } from "react"
 const cairo = Cairo({ subsets: ["arabic"] })
 
-export default function ClientLayout({
+import { fetchSettings, type Settings } from "@/lib/api"
+
+export default  function ClientLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
 
   const [mounted, setMounted] = useState(false)
+  ////
+  //const settings =  fetchSettings()
+  const [settings, setSettings] = useState<Settings | null>(null)
 
   useEffect(() => {
+    const loadMember = async () => {
+      try {
+        const data = await fetchSettings()
+        setSettings(data)
+      } catch (error) {
+        console.error('Error loading settings:', error)
+      } finally {
+        // setIsLoading(false)
+      }
+    }
+
+    loadMember()
     setMounted(true)
+
   }, [])
+
+  // useEffect(() => {
+  //   setMounted(true)
+  // }, [])
 
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>

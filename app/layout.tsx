@@ -3,8 +3,8 @@ import type { Metadata } from "next"
 import ClientLayout from "./client"
 
 export const metadata: Metadata = {
-  title: "الملف الشخصي",
-  description: "موقع الملف الشخصي الخاص بي",
+  title: "تكنوفيزن, رواد تقنية المعلومات",
+  description: "موقع مؤسسة تكنوفيزن التقنية لرايادة الأعمال التقنية",
 }
 
 export default function RootLayout({
