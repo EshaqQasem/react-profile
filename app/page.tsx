@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Code, Download } from "lucide-react"
 import AnimatedText from "@/components/animated-text"
@@ -27,7 +28,7 @@ export default async function Home() {
           <AnimatedSection animation="fadeIn">
             <div className="flex flex-col items-center text-center">
               <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                مرحباً، أنا <AnimatedText text={settings.site_name} className="text-primary" />
+                  <AnimatedText text="تكنوفيزن, رواد تقنية المعلومات" className="text-primary" />
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl">
                 {settings.site_description}
@@ -42,6 +43,26 @@ export default async function Home() {
           </AnimatedSection>
         </div>
       </section>
+
+
+      <AnimatedSection className="flex flex-col md:flex-row gap-12 items-center mb-16 m-4 p-6" animation="fadeIn">
+      <div className="w-full md:w-1/3">
+            <div className="relative w-full aspect-square  overflow-hidden  hover-scale">
+              <Image src="/imags/image.png" alt="صورة شخصية" fill className="object-cover" />
+            </div>
+          </div>
+          <div className="w-full md:w-2/3">
+            <h1 className="text-4xl font-bold mb-4">
+            <span className="text-primary"> قيّمون بقيّمنا </span> 
+             </h1>
+            {/* <p className="text-xl text-muted-foreground mb-6">مطور ويب متخصص في بناء تطبيقات الويب الحديثة</p> */}
+            <p className="text-xl mb-8 max-w-2xl">
+            حرصنا على أن يكون فريق عملنا يحظى بالقيم السامية التي نؤمن بها واهمها الشفافية والثقة، والارتقاء بالجودة، والالتزام. وكل هذا فقط لنقدم لك خدمات التقنية بجودة عالية وخصوصة تامة مما يجعلنا من أفضل شركات البرمجة في آليات العمل.
+            </p>
+            
+          </div>
+         
+        </AnimatedSection>
 
       {/* Services Section */}
       <AnimatedSection className="py-20" id="services">
