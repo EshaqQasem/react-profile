@@ -88,11 +88,10 @@ export interface TeamMemberDetails {
   role: string
   image: string
   bio: string
-  email: string
-  phone: string
-  location: string
-  birthDate: string
-  resume: string
+  email?: string
+  phone?: string
+  location?: string
+  resume?: string
   skills: string[]
   experience: {
     title: string
@@ -128,7 +127,11 @@ interface ApiResponse {
 
 export async function fetchAll(): Promise<ApiResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/home`)
+    const response = await fetch(`${API_BASE_URL}/home`,  {
+      cache: 'no-store',
+      next: { revalidate: 0 }
+    });
+
     if (!response.ok) throw new Error('Failed to fetch data')
     return response.json()
   } catch (error) {
@@ -229,7 +232,10 @@ export async function fetchTechnologies() {
 
 export async function fetchProjects(): Promise<Project[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/projects`)
+    const response = await fetch(`${API_BASE_URL}/projects`, {
+      cache: 'no-store',
+      next: { revalidate: 0 }
+    });
     if (!response.ok) {
       throw new Error('Failed to fetch projects')
     }
@@ -242,7 +248,11 @@ export async function fetchProjects(): Promise<Project[]> {
 
 export async function fetchProject(id: string): Promise<Project | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/projects/${id}`)
+    const response = await fetch(`${API_BASE_URL}/projects/${id}`,  {
+      cache: 'no-store',
+      next: { revalidate: 0 }
+    });
+
     if (!response.ok) {
       throw new Error('Failed to fetch project')
     }
@@ -255,7 +265,11 @@ export async function fetchProject(id: string): Promise<Project | null> {
 
 export async function fetchTeamMember(id: string): Promise<TeamMemberDetails | null> {
   try {
-    const response = await fetch(`${API_BASE_URL}/team-members/${id}`)
+    const response = await fetch(`${API_BASE_URL}/team-members/${id}`, {
+      cache: 'no-store',
+      next: { revalidate: 0 }
+    });
+    
     if (!response.ok) {
       throw new Error('Failed to fetch team member')
     }
@@ -270,7 +284,11 @@ export async function fetchTeamMember(id: string): Promise<TeamMemberDetails | n
 
 export async function fetchTeamMembers(): Promise<TeamMember[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/team-members`)
+    const response = await fetch(`${API_BASE_URL}/team-members`,  {
+      cache: 'no-store',
+      next: { revalidate: 0 }
+    });
+
     if (!response.ok) {
       throw new Error('Failed to fetch team members')
     }

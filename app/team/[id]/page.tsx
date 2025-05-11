@@ -84,11 +84,14 @@ export default function TeamMemberPage() {
               </div>
               
             </div>
+            {member.resume ?  (
             <Button asChild>
               <Link href={member.resume} download>
                 <Download className="ml-2 h-4 w-4" /> تحميل السيرة الذاتية
               </Link>
             </Button>
+          ): ('')}
+
           </div>
         </AnimatedSection>
 
