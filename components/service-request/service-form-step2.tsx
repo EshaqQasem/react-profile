@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ArrowLeft } from "lucide-react"
-import {fetchServices, type Service} from "@/lib/api"
+import { fetchServices, type Service } from "@/lib/api"
 
 interface ServiceFormStep2Props {
   formData: {
@@ -24,7 +24,6 @@ interface ServiceFormStep2Props {
   prevStep: () => void
   nextStep: () => void
 }
-
 
 export default function ServiceFormStep2({
   formData,
@@ -38,6 +37,8 @@ export default function ServiceFormStep2({
   })
 
   const [services, setServices] = useState<Service[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
   useEffect(() => {
     const loadServices = async () => {
       try {
@@ -46,12 +47,11 @@ export default function ServiceFormStep2({
       } catch (error) {
         console.error('Error loading Services:', error)
       } finally {
-        // setIsLoading(false)
+        setIsLoading(false)
       }
     }
 
     loadServices()
-
   }, [])
 
   const handleSelectChange = (value: string) => {
@@ -87,12 +87,6 @@ export default function ServiceFormStep2({
   const labels = {
     title: "تفاصيل الخدمة",
     serviceType: "نوع الخدمة",
-    webDev: "تطوير المواقع",
-    mobileDev: "تطوير تطبيقات الجوال",
-    uiUxDesign: "تصميم واجهة المستخدم",
-    ecommerce: "متجر إلكتروني",
-    seo: "تحسين محركات البحث",
-    other: "أخرى",
     description: "وصف المشروع",
     descriptionPlaceholder: "يرجى وصف مشروعك والمتطلبات الخاصة به...",
     back: "السابق",
@@ -111,12 +105,15 @@ export default function ServiceFormStep2({
               <SelectValue placeholder={labels.serviceType} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="web-development">{labels.webDev}</SelectItem>
-              <SelectItem value="mobile-development">{labels.mobileDev}</SelectItem>
-              <SelectItem value="ui-ux-design">{labels.uiUxDesign}</SelectItem>
-              <SelectItem value="ecommerce">{labels.ecommerce}</SelectItem>
-              <SelectItem value="seo">{labels.seo}</SelectItem>
-              <SelectItem value="other">{labels.other}</SelectItem>
+              {isLoading ? (
+                <SelectItem value="loading" disabled>جاري التحميل...</SelectItem>
+              ) : (
+                services.map((service) => (
+                  <SelectItem key={service.id} value={String(service.id)}>
+                    {service.title}
+                  </SelectItem>
+                ))
+              )}
             </SelectContent>
           </Select>
           {errors.serviceType && <p className="text-sm text-red-500 mt-1">{errors.serviceType}</p>}
