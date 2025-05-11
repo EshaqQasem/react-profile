@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://technovizen.com/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.technovizen.com/api'
 
 interface Service {
   id: number
@@ -163,6 +163,25 @@ export async function fetchAll(): Promise<ApiResponse> {
   }
 }
 
+export interface Project {
+  id: string
+  title: string
+  description: string
+  fullDescription: string
+  features: string[]
+  technologies: string[]
+  image: string
+  gallery: string[]
+  client: string
+  date: string
+  duration: string
+  website?: string
+  github?: string
+  tags: string[]
+  order_column: number
+}
+
+
 // Keeping these functions for backward compatibility
 export async function fetchServices(): Promise<Service[]> {
   try {
@@ -208,24 +227,6 @@ export async function fetchTechnologies() {
   }
 } 
 
-export interface Project {
-  id: string
-  title: string
-  description: string
-  fullDescription: string[]
-  features: string[]
-  technologies: string[]
-  image: string
-  gallery: string[]
-  client: string
-  date: string
-  duration: string
-  website?: string
-  github?: string
-  tags: string[]
-  order_column: number
-}
-
 export async function fetchProjects(): Promise<Project[]> {
   try {
     const response = await fetch(`${API_BASE_URL}/projects`)
@@ -264,3 +265,16 @@ export async function fetchTeamMember(id: string): Promise<TeamMemberDetails | n
     return null
   }
 } 
+
+export async function fetchTeamMembers(): Promise<TeamMember[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/team-members`)
+    if (!response.ok) {
+      throw new Error('Failed to fetch team members')
+    }
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching team members:', error)
+    return []
+  } 
+}

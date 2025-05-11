@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'technovizen.com',
+        hostname: 'api.technovizen.com',
         pathname: '/storage/media/**',
       },
     ],
