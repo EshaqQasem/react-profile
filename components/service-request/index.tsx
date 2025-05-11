@@ -3,12 +3,14 @@
 import { ServiceRequestProvider } from "./service-request-context"
 import ServiceRequestButton from "./service-request-button"
 import ServiceRequestModal from "./service-request-modal"
-
-export default function ServiceRequestWrapper() {
+interface PageProp{
+  whatsapp: string
+}
+export default function ServiceRequestWrapper({whatsapp}: PageProp) {
   return (
     <ServiceRequestProvider>
       <ServiceRequestButton />
-      <ServiceRequestModal />
+      <ServiceRequestModal whatsapp={whatsapp} />
     </ServiceRequestProvider>
   )
 }

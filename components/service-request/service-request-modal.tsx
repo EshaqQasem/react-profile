@@ -19,7 +19,10 @@ interface ServiceFormData  {
   description: string
 }
 
-export default function ServiceRequestModal() {
+interface PageProp{
+  whatsapp: string
+}
+export default function ServiceRequestModal({whatsapp}: PageProp) {
   const { isOpen, closeModal } = useServiceRequestModal()
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -45,7 +48,7 @@ export default function ServiceRequestModal() {
       const message = prepareWhatsAppMessage(formData);
       await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulated delay
   
-      const phoneNumber = "967775042349"; // Replace with actual number
+      const phoneNumber = whatsapp; // Replace with actual number
       const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
   
       if (!whatsappUrl) {

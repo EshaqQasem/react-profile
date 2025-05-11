@@ -79,7 +79,7 @@ export default  function ClientLayout({
             
             settings={settings}
           />
-          <ServiceRequestWrapper />
+          <ServiceRequestWrapper whatsapp={settings?.social_network?.whatsapp ?? "967738794"} />
         </ThemeProvider>
       </body>
     </html>

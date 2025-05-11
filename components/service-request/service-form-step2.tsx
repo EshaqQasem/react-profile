@@ -109,7 +109,7 @@ export default function ServiceFormStep2({
                 <SelectItem value="loading" disabled>جاري التحميل...</SelectItem>
               ) : (
                 services.map((service) => (
-                  <SelectItem key={service.id} value={String(service.id)}>
+                  <SelectItem key={service.id} value={String(service.title)}>
                     {service.title}
                   </SelectItem>
                 ))
