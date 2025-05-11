@@ -18,20 +18,26 @@ interface TeamMemberProps {
 
 export default function TeamMemberCard({ name, role, image, href, socialLinks }: TeamMemberProps) {
   return (
-    <Link href={href} className="block">
       <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <Link href={href} className="block">
+
         <div className="relative w-full h-64">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-cover"
+            className="object-cover "
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
+        </Link>
+
         <CardContent className="p-4 text-center">
+        <Link href={href} className="block">
+
           <h3 className="text-xl font-bold mb-1">{name}</h3>
           <p className="text-muted-foreground">{role}</p>
+          </Link>
           {socialLinks && (
             <div className="flex justify-center gap-4 mt-3">
               {socialLinks.twitter && (
@@ -77,6 +83,5 @@ export default function TeamMemberCard({ name, role, image, href, socialLinks }:
           )}
         </CardContent>
       </Card>
-    </Link>
   )
 }

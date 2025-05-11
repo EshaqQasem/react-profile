@@ -5,11 +5,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import SectionHeading from "@/components/section-heading"
-import { Download, Mail, Phone, MapPin, Briefcase, GraduationCap } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
+import { Download, Mail, Phone, MapPin, Briefcase, GraduationCap, ArrowRight } from "lucide-react"
 import AnimatedSection from "@/components/animated-section"
 import { useParams } from "next/navigation"
 import { fetchTeamMember, type TeamMemberDetails } from "@/lib/api"
+import ProjectCard from "@/components/project-card"
 
 export default function TeamMemberPage() {
   const params = useParams()
@@ -49,7 +49,7 @@ export default function TeamMemberPage() {
         <h1 className="text-3xl font-bold mb-4">العضو غير موجود</h1>
         <p className="text-muted-foreground mb-8">لم يتم العثور على العضو المطلوب</p>
         <Button asChild>
-          <Link href="/team">العودة إلى فريق العمل</Link>
+          <Link href="/">العودة إلى فريق العمل</Link>
         </Button>
       </div>
     )
@@ -72,15 +72,15 @@ export default function TeamMemberPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-primary" />
-                <span>{member.email}</span>
+                <span>{member.contact.email}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-5 w-5 text-primary" />
-                <span dir="ltr">{member.phone}</span>
+                <span dir="ltr">{member.contact.phone}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="h-5 w-5 text-primary" />
-                <span>{member.location}</span>
+                <span>{member.contact.location}</span>
               </div>
               
             </div>
@@ -95,8 +95,7 @@ export default function TeamMemberPage() {
           </div>
         </AnimatedSection>
 
-        {/* About Section */}
-        <AnimatedSection className="mb-16" animation="fadeInUp">
+        {/* <AnimatedSection className="mb-16" animation="fadeInUp">
           <SectionHeading title="نبذة عني" subtitle="معلومات عن حياتي المهنية" />
 
           <Card className="border-primary/20 overflow-hidden hover-scale">
@@ -146,14 +145,12 @@ export default function TeamMemberPage() {
             </div>
           </Card>
 
-          {/* Highlights */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {member.highlights.map((highlight, index) => (
               <AnimatedSection key={index} delay={0.1 + index * 0.1} className="hover-scale">
                 <Card className="p-6 bg-gradient-to-br from-background to-muted/30 border-primary/10 hover:shadow-md transition-shadow">
                   <h3 className="text-xl font-bold mb-3 flex items-center">
                     <span className="bg-primary/10 p-2 rounded-full ml-2">
-                      {/* You can map the icon string to actual Lucide icons here */}
                       <Briefcase className="h-5 w-5 text-primary" />
                     </span>
                     {highlight.title}
@@ -163,13 +160,13 @@ export default function TeamMemberPage() {
               </AnimatedSection>
             ))}
           </div>
-        </AnimatedSection>
+        </AnimatedSection> */}
 
         {/* Timeline Section */}
         <AnimatedSection className="mb-16" animation="fadeInUp">
           <SectionHeading title="المسيرة المهنية" subtitle="الخبرات والتعليم" />
           <div className="relative border-r-2 border-primary/20 pr-10">
-            {[...member.experience, ...member.education].map((item, index, array) => {
+            {[...member.experience].map((item, index, array) => {
               const Icon = 'title' in item ? Briefcase : GraduationCap
               return (
                 <AnimatedSection
@@ -182,10 +179,10 @@ export default function TeamMemberPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">
-                      {'title' in item ? item.title : item.degree}
+                      {item.title }
                     </h3>
                     <p className="text-muted-foreground">
-                      {'company' in item ? item.company : item.institution} - {item.period}
+                      {item.company} - {item.period}
                     </p>
                     <p className="mt-2">{item.description}</p>
                   </div>
@@ -196,7 +193,7 @@ export default function TeamMemberPage() {
         </AnimatedSection>
 
         {/* Skills Section */}
-        <AnimatedSection className="mb-16" animation="fadeInUp">
+        {/* <AnimatedSection className="mb-16" animation="fadeInUp">
           <SectionHeading title="المهارات" subtitle="مجالات التخصص" />
           <div className="flex flex-wrap gap-2">
             {member.skills.map((skill, index) => (
@@ -207,7 +204,28 @@ export default function TeamMemberPage() {
               </AnimatedSection>
             ))}
           </div>
-        </AnimatedSection>
+        </AnimatedSection> */}
+
+        <AnimatedSection className="py-20 bg-muted/50" id="projects">
+        <div className="container">
+          <SectionHeading title="المشاريع" subtitle="بعض المشاريع التي قمت بتطويرها" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {member.projects.map((project) => (
+              <AnimatedSection key={project.id} delay={project.order_column * 0.1} className="hover-scale">
+                <ProjectCard
+                  id={project.id.toString()}
+                  title={project.title}
+                  description={project.description}
+                  image={project.image}
+                  tags={project.tags}
+                />
+              </AnimatedSection>
+            ))}
+          </div>
+          
+        </div>
+      </AnimatedSection>
+
       </div>
     </div>
   )

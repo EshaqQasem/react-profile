@@ -88,9 +88,13 @@ export interface TeamMemberDetails {
   role: string
   image: string
   bio: string
-  email?: string
-  phone?: string
-  location?: string
+  contact: {
+    email?: string
+    phone?: string
+    location?: string
+
+  }
+ 
   resume?: string
   skills: string[]
   experience: {
@@ -99,12 +103,12 @@ export interface TeamMemberDetails {
     period: string
     description: string
   }[]
-  education: {
-    degree: string
-    institution: string
-    period: string
-    description: string
-  }[]
+  // education: {
+  //   degree: string
+  //   institution: string
+  //   period: string
+  //   description: string
+  // }[]
   stats: {
     completedProjects: number
     happyClients: number
@@ -115,6 +119,8 @@ export interface TeamMemberDetails {
     description: string
     icon: string
   }[]
+
+  projects: Project[]
 }
 
 interface ApiResponse {
@@ -269,7 +275,7 @@ export async function fetchTeamMember(id: string): Promise<TeamMemberDetails | n
       cache: 'no-store',
       next: { revalidate: 0 }
     });
-    
+
     if (!response.ok) {
       throw new Error('Failed to fetch team member')
     }
