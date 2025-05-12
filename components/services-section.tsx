@@ -1,11 +1,11 @@
-import type { LucideIcon } from "lucide-react"
+// import type { LucideIcon } from "lucide-react"
 import SectionHeading from "@/components/section-heading"
 import ServiceCard from "@/components/service-card"
 
 export interface Service {
   title: string
   description: string
-  icon: LucideIcon
+  icon: string
 }
 
 interface ServicesSectionProps {

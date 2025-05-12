@@ -68,7 +68,8 @@ export default function TeamMemberPage() {
           <div className="w-full md:w-2/3">
             <h1 className="text-4xl font-bold mb-4">{member.name}</h1>
             <p className="text-xl text-muted-foreground mb-6">{member.role}</p>
-            <p className="mb-6">{member.bio}</p>
+            {/* <p className="mb-6">{member.bio}</p> */}
+            <div className="mb-6" dangerouslySetInnerHTML={{ __html: member.bio }} />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               <div className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-primary" />
@@ -184,7 +185,9 @@ export default function TeamMemberPage() {
                     <p className="text-muted-foreground">
                       {item.company} - {item.period}
                     </p>
-                    <p className="mt-2">{item.description}</p>
+                    {/* <p className="mt-2">{item.description}</p> */}
+                    <div className="mt-2" dangerouslySetInnerHTML={{ __html: item.description }} />
+
                   </div>
                 </AnimatedSection>
               )

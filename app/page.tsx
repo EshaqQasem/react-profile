@@ -74,7 +74,7 @@ export default async function Home() {
                 <ServiceCard 
                   title={service.title} 
                   description={service.description} 
-                  icon={getIcon(service.icon)} 
+                  icon={(service.icon)} 
                 />
               </AnimatedSection>
             ))}
