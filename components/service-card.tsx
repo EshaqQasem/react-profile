@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 // import type { LucideIcon } from "lucide-react"
-import { DynamicIcon } from 'lucide-react/dynamic';
+// import { DynamicIcon } from 'lucide-react/dynamic';
 
 interface ServiceCardProps {
   title: string
