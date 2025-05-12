@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+// import { Input } from "@/components/ui/input"
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
 import { type Settings } from "@/lib/api"
 import WhatsAppButton from "./whatsapp-button"
