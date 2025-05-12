@@ -54,6 +54,8 @@ export interface Settings {
   theme_color: string | null
   support_email: string
   support_phone: string
+  seo_title?: string
+  seo_keywords?: string
   social_network: {
     tiktok: string | null
     youtube: string | null

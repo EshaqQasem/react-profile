@@ -4,7 +4,7 @@ import ClientLayout from "./client"
 
 export const metadata: Metadata = {
   title: "تكنوفيزن, رواد تقنية المعلومات",
-  description: "موقع مؤسسة تكنوفيزن التقنية لرايادة الأعمال التقنية",
+  description: " مؤسسة تكنوفيزن لرايادة الأعمال التقنية",
 }
 
 export default function RootLayout({

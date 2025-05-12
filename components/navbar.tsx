@@ -10,12 +10,12 @@ import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import WhatsAppButton from "./whatsapp-button"
 import Image from "next/image"
-// import { type Settings } from "@/lib/api"
+import { type Settings } from "@/lib/api"
 
 interface SettingsProp{
-  whatsapp: string
+  settings: Settings | null
 }
-export default function Navbar({whatsapp}: SettingsProp) {
+export default function Navbar({settings}: SettingsProp) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -54,7 +54,7 @@ export default function Navbar({whatsapp}: SettingsProp) {
         >
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/imags/logo.png"
+              src={settings?.site_logo ?? "/imags/logo.png"}
               alt="شعار الموقع"
               width={40}
               height={40}
@@ -99,7 +99,7 @@ export default function Navbar({whatsapp}: SettingsProp) {
               )}
             </Link>
           ))}
-          <WhatsAppButton variant="icon" size="md" showText={false} phoneNumber = {whatsapp} />
+          <WhatsAppButton variant="icon" size="md" showText={false} phoneNumber = {settings?.social_network?.whatsapp ?? "96771265925"} />
           <div className="flex items-center gap-2">
             <ThemeToggle />
             <ColorThemeSwitcher />
