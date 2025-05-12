@@ -36,9 +36,9 @@ export default function Navbar({whatsapp}: SettingsProp) {
 
   const navLinks = [
     { href: "/", label: "الرئيسية" },
-    { href: "/about", label: "من أنا" },
-    { href: "/projects", label: "أعمالي" },
-    { href: "/blog", label: "المدونة" },
+    // { href: "/about", label: "من أنا" },
+    { href: "/projects", label: "أعمالنا" },
+    // { href: "/blog", label: "المدونة" },
   ]
 
   const isActive = (path: string) => pathname === path

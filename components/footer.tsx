@@ -68,19 +68,19 @@ export default function Footer({settings}: SettingsProp) {
                   الرئيسية
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/about" className="text-muted-foreground hover:text-foreground">
                   من أنا
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link href="/blog" className="text-muted-foreground hover:text-foreground">
                   المدونة
                 </Link>
-              </li>
+              </li> */}
               <li>
-                <Link href="#projects" className="text-muted-foreground hover:text-foreground">
-                  المشاريع
+                <Link href="/projects" className="text-muted-foreground hover:text-foreground">
+                  أعمالنا
                 </Link>
               </li>
             </ul>

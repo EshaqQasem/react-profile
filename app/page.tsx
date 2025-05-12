@@ -67,7 +67,7 @@ export default async function Home() {
       {/* Services Section */}
       <AnimatedSection className="py-20" id="services">
         <div className="container">
-          <SectionHeading title="الخدمات" subtitle="أقدم مجموعة متنوعة من الخدمات لتلبية احتياجاتك التقنية" />
+          <SectionHeading title="الخدمات" subtitle="تقدم تكنوفيزن مجموعة متنوعة من الخدمات لتلبية احتياجاتك التقنية" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <AnimatedSection key={service.id} delay={index * 0.1} className="hover-scale">
@@ -171,7 +171,7 @@ export default async function Home() {
       {/* Testimonials Section */}
       <AnimatedSection className="py-20" id="testimonials" animation="fadeIn">
         <div className="container">
-          <SectionHeading title="آراء العملاء" subtitle="ما يقوله العملاء عن خدماتي" />
+          <SectionHeading title="آراء العملاء" subtitle="ما يقوله العملاء عن خدماتنا" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
               <AnimatedSection key={testimonial.id} delay={index * 0.1} className="hover-scale">
@@ -203,9 +203,9 @@ export default async function Home() {
                 className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary hover-lift"
                 asChild
               >
-                <Link href="/imags/2.pdf" download>
+                {/* <Link href="/imags/2.pdf" download>
                   <Download className="ml-2 h-4 w-4" /> تحميل السيرة الذاتية
-                </Link>
+                </Link> */}
               </Button>
             </div>
           </div>

@@ -196,19 +196,19 @@ export default function TeamMemberPage() {
         </AnimatedSection>
 
         {/* Skills Section */}
-        {/* <AnimatedSection className="mb-16" animation="fadeInUp">
+        <AnimatedSection className="mb-16" animation="fadeInUp">
           <SectionHeading title="المهارات" subtitle="مجالات التخصص" />
           <div className="flex flex-wrap gap-2">
-            {member.skills.map((skill, index) => (
+            {member.skills.length > 0 && (member.skills.map((skill, index) => (
               <AnimatedSection key={index} delay={0.1 + index * 0.05}>
                 <div className="bg-primary/10 text-primary px-4 py-2 rounded-full hover-lift">
                   {skill}
                 </div>
               </AnimatedSection>
-            ))}
+            )))}
           </div>
-        </AnimatedSection> */}
-
+        </AnimatedSection>
+        {member.projects.length > 0 && (
         <AnimatedSection className="py-20 bg-muted/50" id="projects">
         <div className="container">
           <SectionHeading title="المشاريع" subtitle="بعض المشاريع التي قمت بتطويرها" />
@@ -228,7 +228,7 @@ export default function TeamMemberPage() {
           
         </div>
       </AnimatedSection>
-
+        )}
       </div>
     </div>
   )

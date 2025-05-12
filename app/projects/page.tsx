@@ -97,7 +97,7 @@ export default function ProjectsPage() {
         <AnimatedSection className="text-center mb-12" animation="fadeIn">
           <h1 className="text-4xl font-bold mb-4">معرض المشاريع</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            مجموعة من المشاريع التي قمت بتطويرها باستخدام أحدث التقنيات
+            مجموعة من المشاريع التي قام قريق تكنوفيزن بتطويرها باستخدام أحدث التقنيات
           </p>
         </AnimatedSection>
 
