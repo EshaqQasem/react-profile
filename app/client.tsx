@@ -52,7 +52,7 @@ export default  function ClientLayout({
         <meta name="color-scheme" content="light dark" />
         <meta name="keywords" content={settings?.seo_keywords} />
         <link rel="icon" href={settings?.site_favicon ?? "/favicon.ico" } />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" /> */}
 
       </head>
       <body className={`${cairo.className} antialiased transition-colors duration-300`}>
