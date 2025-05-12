@@ -196,21 +196,22 @@ export default async function Home() {
             <h2 className="text-3xl font-bold mb-4">هل لديك فكرة؟</h2>
             <p className="text-primary-foreground/80 mb-8">دعنا نتعاون لتحويل أفكارك إلى واقع رقمي مميز</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <WhatsAppButton size="lg" className="hover-lift" phoneNumber={settings.social_network.whatsapp ? "967711265925"}/>
-              <Button
+              <WhatsAppButton size="lg" className="hover-lift" phoneNumber={settings.social_network.whatsapp ?? "967711265925" }/>
+              {/* <Button
                 size="lg"
                 variant="outline"
                 className="bg-transparent text-primary-foreground border-primary-foreground hover:bg-primary-foreground hover:text-primary hover-lift"
                 asChild
               >
-                {/* <Link href="/imags/2.pdf" download>
+                <Link href="/imags/2.pdf" download>
                   <Download className="ml-2 h-4 w-4" /> تحميل السيرة الذاتية
-                </Link> */}
-              </Button>
+                </Link>
+              </Button> */}
             </div>
           </div>
         </div>
       </AnimatedSection>
+
     </div>
   )
 }
