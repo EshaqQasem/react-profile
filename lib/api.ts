@@ -41,11 +41,8 @@ interface Testimonial {
   content: string
   avatar: string
   rating: number
-  is_active: number
-  order_column: number
-  created_at: string
-  updated_at: string
-  deleted_at: string | null
+
+ 
 }
 
 export interface Settings {

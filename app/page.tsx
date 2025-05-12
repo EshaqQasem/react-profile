@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Download } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import AnimatedText from "@/components/animated-text"
 import SectionHeading from "@/components/section-heading"
 import ProjectCard from "@/components/project-card"
@@ -193,10 +193,10 @@ export default async function Home() {
       <AnimatedSection className="py-20 bg-primary text-primary-foreground" animation="scaleIn">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">هل أنت مستعد للعمل معي؟</h2>
+            <h2 className="text-3xl font-bold mb-4">هل لديك فكرة؟</h2>
             <p className="text-primary-foreground/80 mb-8">دعنا نتعاون لتحويل أفكارك إلى واقع رقمي مميز</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <WhatsAppButton size="lg" className="hover-lift" />
+              <WhatsAppButton size="lg" className="hover-lift" phoneNumber={settings.social_network.whatsapp ? "967711265925"}/>
               <Button
                 size="lg"
                 variant="outline"

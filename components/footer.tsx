@@ -88,9 +88,9 @@ export default function Footer({settings}: SettingsProp) {
           <div>
             <h3 className="text-lg font-bold mb-4">تواصل معنا</h3>
             <div className="space-y-4">
-              <p className="text-muted-foreground">يمكنك التواصل معنا مباشرة عبر واتساب أو من خلال النموذج أدناه</p>
+              <p className="text-muted-foreground">يمكنك التواصل معنا مباشرة عبر واتساب</p>
               <WhatsAppButton phoneNumber={settings?.social_network?.whatsapp ?? "967711265925"} message="مرحباً، أود التواصل معك بخصوص مشروع..." />
-              <form className="space-y-4 mt-4">
+              {/* <form className="space-y-4 mt-4">
                 <Input type="email" placeholder="البريد الإلكتروني" />
                 <Input type="text" placeholder="الموضوع" />
                 <textarea
@@ -100,7 +100,7 @@ export default function Footer({settings}: SettingsProp) {
                 <Button type="submit" className="w-full hover-lift">
                   إرسال
                 </Button>
-              </form>
+              </form> */}
             </div>
           </div>
         </div>
