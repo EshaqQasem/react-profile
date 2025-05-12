@@ -14,7 +14,7 @@ import WhatsAppButton from "@/components/whatsapp-button"
 import TeamSlider from "@/components/team-slider"
 
 import { fetchAll } from "@/lib/api"
-import { getIcon } from "@/lib/icons"
+// import { getIcon } from "@/lib/icons"
 
 export default async function Home() {
   const { services, projects, members, testimonials, settings } = await fetchAll()
