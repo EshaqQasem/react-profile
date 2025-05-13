@@ -11,16 +11,14 @@ import AnimatedSection from "@/components/animated-section"
 import WhatsAppButton from "@/components/whatsapp-button"
 import ProjectCard from "@/components/project-card"
 import { useParams } from "next/navigation"
-import { fetchProject, fetchProjects, type Project } from "@/lib/api"
+import { fetchProject, type ProjectDetails } from "@/lib/api"
 
 export default function ProjectPage() {
   const params = useParams()
   const projectId = params?.id as string
 
-  const [project, setProject] = useState<Project | null>(null)
-  const [relatedProjects, setRelatedProjects] = useState<Project[]>([])
+  const [project, setProject] = useState<ProjectDetails | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const showRelatedProjects = false;
   useEffect(() => {
    
     const loadProject = async () => {
@@ -28,15 +26,7 @@ export default function ProjectPage() {
         const data = await fetchProject(projectId)
         setProject(data)
 
-        if (data && showRelatedProjects) {
-          // Fetch all projects to get related ones
-          const allProjects = await fetchProjects()
-          const related = allProjects
-            .filter((p) => p.id !== data.id)
-            .filter((p) => p.tags.some((tag) => data.tags.includes(tag)))
-            .slice(0, 3)
-          setRelatedProjects(related)
-        }
+      
       } catch (error) {
         console.error('Error loading project:', error)
       } finally {
@@ -105,11 +95,7 @@ export default function ProjectPage() {
             </div>
 
             <div className="space-y-4 mb-8">
-              {/* {project.fullDescription.map((paragraph, index) => ( */}
-                <p className="text-muted-foreground">
-                  {project.full_description}
-                </p>
-              {/* ))} */}
+                <div className="text-muted-foreground"  dangerouslySetInnerHTML={{ __html: project.full_description }} />
             </div>
 
             <h2 className="text-2xl font-bold mb-4">المميزات</h2>
@@ -167,6 +153,7 @@ export default function ProjectPage() {
                   <p className="text-muted-foreground">{project.duration}</p>
                 </div>
 
+                {(project.website || project.github) && (
                 <div>
                   <h3 className="font-bold mb-2">روابط المشروع</h3>
                   <div className="space-y-2">
@@ -189,10 +176,11 @@ export default function ProjectPage() {
                     )}
                   </div>
                 </div>
+                  )}
 
                 <div>
                   <h3 className="font-bold mb-4">هل تريد مشروعًا مشابهًا؟</h3>
-                  <WhatsAppButton
+                  <WhatsAppButton 
                     message={`مرحباً، أعجبني مشروع "${project.title}" وأود التحدث معك حول مشروع مشابه...`}
                     className="w-full"
                   />
@@ -203,11 +191,11 @@ export default function ProjectPage() {
         </div>
 
         {/* Related Projects */}
-        {showRelatedProjects && relatedProjects.length > 0 && (
+        {project.relatedProjects.length > 0 && (
           <AnimatedSection className="mt-16" animation="fadeIn" delay={0.3}>
             <h2 className="text-2xl font-bold mb-8">مشاريع ذات صلة</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedProjects.map((relatedProject) => (
+              {project.relatedProjects.map((relatedProject) => (
                 <AnimatedSection key={relatedProject.id} className="hover-scale" delay={0.4}>
                   <ProjectCard
                     id={relatedProject.id}

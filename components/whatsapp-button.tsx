@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
+import { useSettings } from "@/context/SettingsContext"
 
 interface WhatsAppButtonProps {
   phoneNumber?: string
@@ -22,10 +23,11 @@ export default function WhatsAppButton({
 }: WhatsAppButtonProps) {
   // State to hold the WhatsApp number (ensuring client-side consistency)
   const [whatsappNumber, setWhatsappNumber] = useState<string | null>(null)
+  const { settings } = useSettings()
 
   useEffect(() => {
     // Set the WhatsApp number dynamically to prevent hydration mismatch
-    setWhatsappNumber(phoneNumber ?? "967711265925") // Fallback to default number
+    setWhatsappNumber(phoneNumber ?? ((settings?.social_network.whatsapp) ?? "967711265925")) // Fallback to default number
   }, [phoneNumber])
 
   // Do not render the link until the number is set (prevents hydration issues)

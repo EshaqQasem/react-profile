@@ -12,32 +12,35 @@ import PageLoading from "@/components/page-loading"
 import { useState, useEffect } from "react"
 const cairo = Cairo({ subsets: ["arabic"] })
 
-import { fetchSettings, type Settings } from "@/lib/api"
+// import { fetchSettings, type Settings } from "@/lib/api"
 
-export default  function ClientLayout({
+import { SettingsProvider, useSettings } from "@/context/SettingsContext"
+
+  function LayoutContent({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
 
+  const { settings } = useSettings()
   const [mounted, setMounted] = useState(false)
-  ////
-  //const settings =  fetchSettings()
-  const [settings, setSettings] = useState<Settings | null>(null)
+
+  // const [mounted, setMounted] = useState(false)
+  // const [settings, setSettings] = useState<Settings | null>(null)
 
   useEffect(() => {
-    const loadSettings = async () => {
-      try {
-        const data = await fetchSettings()
-        setSettings(data)
-      } catch (error) {
-        console.error('Error loading settings:', error)
-      } finally {
-        // setIsLoading(false)
-      }
-    }
+    // const loadSettings = async () => {
+    //   try {
+    //     const data = await fetchSettings()
+    //     setSettings(data)
+    //   } catch (error) {
+    //     console.error('Error loading settings:', error)
+    //   } finally {
+    //     // setIsLoading(false)
+    //   }
+    // }
 
-    loadSettings()
+    // loadSettings()
     setMounted(true)
 
   }, [])
@@ -86,6 +89,14 @@ export default  function ClientLayout({
         </ThemeProvider>
       </body>
     </html>
+  )
+}
+
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <SettingsProvider>
+      <LayoutContent children={children} />
+    </SettingsProvider>
   )
 }
 

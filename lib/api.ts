@@ -130,7 +130,7 @@ interface ApiResponse {
   settings: Settings
 }
 
-export interface Project {
+export interface ProjectDetails {
   id: string
   title: string
   description: string
@@ -139,13 +139,23 @@ export interface Project {
   technologies: string[]
   image: string
   gallery: string[]
-  client: string
+  client: string | null
   date: string
   duration: string
   website?: string
   github?: string
   tags: string[]
   order_column: number
+  relatedProjects: Project[]
+}
+
+export interface Project {
+  id: string
+  title: string
+  description: string
+  image: string
+  order_column: number
+  tags: string[]
 }
 
 export async function fetchSettings(): Promise<Settings | null> {
@@ -267,7 +277,7 @@ export async function fetchProjects(): Promise<Project[]> {
   }
 }
 
-export async function fetchProject(id: string): Promise<Project | null> {
+export async function fetchProject(id: string): Promise<ProjectDetails | null> {
   try {
     const response = await fetch(`${API_BASE_URL}/projects/${id}`,  {
       cache: 'no-store',
