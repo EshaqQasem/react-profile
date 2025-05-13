@@ -12,15 +12,11 @@ import PageLoading from "@/components/page-loading"
 import { useState, useEffect } from "react"
 const cairo = Cairo({ subsets: ["arabic"] })
 
-// import { fetchSettings, type Settings } from "@/lib/api"
+// import { fetchSettings, type Settings } from. "@/lib/api"
 
 import { SettingsProvider, useSettings } from "@/context/SettingsContext"
 
-  function LayoutContent({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+  function LayoutContent({ children }: { children: React.ReactNode }) {
 
   const { settings } = useSettings()
   const [mounted, setMounted] = useState(false)
