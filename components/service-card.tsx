@@ -21,7 +21,7 @@ export default function ServiceCard({ title, description, icon }: ServiceCardPro
         {IconComponent ? (
             <IconComponent className="h-8 w-8 text-primary" />
           ) : (
-            <Code className="text-red-500" />
+            <Code className="h-8 w-8 text-primary" />
           )}
         {/* <div dangerouslySetInnerHTML={{ __html: icon }} /> */}
 
