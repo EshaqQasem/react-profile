@@ -4,23 +4,24 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import TeamMemberCard from './team-member-card';
 import AnimatedSection from './animated-section';
-
+import { type TeamMember } from "@/lib/api" ;
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-interface TeamMember {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  social_links?: {
-    twitter?: string;
-    linkedin?: string;
-    github?: string;
-  };
-}
+// interface TeamMember {
+//   id: number;
+//   name: string;
+//   role: string;
+//   image: string;
+//   skills?: string[]
+//   social_links?: {
+//     twitter?: string;
+//     linkedin?: string;
+//     github?: string;
+//   };
+// }
 
 interface TeamSliderProps {
   members: TeamMember[];
@@ -64,6 +65,7 @@ export default function TeamSlider({ members }: TeamSliderProps) {
                 image={member.image}
                 socialLinks={member.social_links}
                 href={`/team/${member.id}`}
+                skills={member.skills}
               />
             </AnimatedSection>
           </SwiperSlide>

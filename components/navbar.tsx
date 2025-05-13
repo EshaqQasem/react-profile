@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { ThemeToggle } from "./theme-toggle"
 import { ColorThemeSwitcher } from "./color-theme-switcher"
 import { Menu, X } from "lucide-react"
-import { useTheme } from "next-themes"
+// import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import WhatsAppButton from "./whatsapp-button"
 import Image from "next/image"
@@ -17,7 +17,7 @@ interface SettingsProp{
 }
 export default function Navbar({settings}: SettingsProp) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { theme } = useTheme()
+  // const { theme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
 
@@ -60,7 +60,7 @@ export default function Navbar({settings}: SettingsProp) {
               height={40}
               className="h-8 w-auto"
             />
-            {mounted && theme === "dark" && <span className="text-xs text-primary"></span>}
+            {mounted  && <span className="ext-xl font-bold ">{settings?.site_name}</span>}
             {/* {mounted && theme === "light" && <span className="text-xs text-primary">وضع فاتح</span>} */}
           </Link>
         </motion.div>

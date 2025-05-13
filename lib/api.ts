@@ -69,15 +69,18 @@ export interface Settings {
 }
 
 
-interface TeamMember {
+export interface TeamMember {
   id: number;
   name: string;
   role: string;
   image: string;
+  skills: string[]
+
   social_links?: {
-    twitter?: string;
-    linkedin?: string;
-    github?: string;
+    twitter?: string
+    linkedin?: string
+    github?: string
+    personal_site?:string
   };
 }
 
