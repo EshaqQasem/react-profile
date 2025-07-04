@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from './ui/card';
 import {  Globe } from 'lucide-react';
-import { Badge } from "@/components/ui/badge"
+// import { Badge } from "@/components/ui/badge"
 
 interface TeamMemberProps {
   name: string;
@@ -20,7 +20,7 @@ interface TeamMemberProps {
   };
 }
 
-export default function TeamMemberCard({ name, role, image, href, socialLinks, skills }: TeamMemberProps) {
+export default function TeamMemberCard({ name, role, image, href, socialLinks }: TeamMemberProps) {
   return (
       <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <Link href={href} className="block">
