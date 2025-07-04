@@ -116,19 +116,7 @@ export default function ProjectPage() {
               ))}
             </div>
 
-            <h2 className="text-2xl font-bold mb-4">معرض الصور</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {project.gallery.map((image, index) => (
-                <div key={index} className="relative h-[200px] rounded-lg overflow-hidden hover-scale">
-                  <Image
-                    src={image || "/placeholder.svg"}
-                    alt={`${project.title} - صورة ${index + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
+
           </AnimatedSection>
 
           {/* Sidebar */}
@@ -188,6 +176,19 @@ export default function ProjectPage() {
               </CardContent>
             </Card>
           </AnimatedSection>
+        </div>
+        <h2 className="text-2xl font-bold mb-4">معرض الصور</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {project.gallery.map((image, index) => (
+              <div key={index} className="relative h-[200px] rounded-lg overflow-hidden hover-scale">
+                <Image
+                    src={image || "/placeholder.svg"}
+                    alt={`${project.title} - صورة ${index + 1}`}
+                    fill
+                    className="object-cover"
+                />
+              </div>
+          ))}
         </div>
 
         {/* Related Projects */}

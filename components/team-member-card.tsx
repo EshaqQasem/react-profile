@@ -42,13 +42,13 @@ export default function TeamMemberCard({ name, role, image, href, socialLinks, s
           <h3 className="text-xl font-bold mb-1">{name}</h3>
           <p className="text-muted-foreground">{role}</p>
           </Link>
-          <div className="flex flex-wrap gap-2 mb-4">
-          {skills && skills.length > 0 && skills.map((skill) => (
-            <Badge key={skill} variant="secondary">
-              {skill}
-            </Badge>
-          ))}
-        </div>
+        {/*  <div className="flex flex-wrap gap-2 mb-4">*/}
+        {/*  {skills && skills.length > 0 && skills.map((skill) => (*/}
+        {/*    <Badge key={skill} variant="secondary">*/}
+        {/*      {skill}*/}
+        {/*    </Badge>*/}
+        {/*  ))}*/}
+        {/*</div>*/}
           {socialLinks && (
             <div className="flex justify-center gap-4 mt-3">
             
