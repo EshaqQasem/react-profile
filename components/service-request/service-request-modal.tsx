@@ -123,7 +123,7 @@ export default function ServiceRequestModal({whatsapp}: PageProp) {
         )}
 
         {/* Form Steps */}
-        <div className="mt-4 overflow-hidden relative">
+        <div className="mt-4 pr-4 pl-2 overflow-hidden relative">
           {isSubmitting && (
             <div className="absolute inset-0 bg-background/80 flex items-center justify-center z-50">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
